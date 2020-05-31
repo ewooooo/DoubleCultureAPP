@@ -1,3 +1,6 @@
+import 'package:geolocator/geolocator.dart';
+
+
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
@@ -78,6 +81,10 @@ class Server{
       // If the server did not return a 200 OK response, then throw an exception.
       throw Exception('Failed to load Museum');
     }
+  }
+  Future<UserMuseum> testDef() async{
+    Position position = await Geolocator().getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+    print(position);
   }
 }
 

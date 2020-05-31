@@ -39,7 +39,7 @@ class MyHomePage extends StatelessWidget{
           FlatButton(
               color: Colors.orangeAccent,
               onPressed: (){
-                server.postUser();
+                server.testDef();
               },
               child: Text("GET WITH QUERY")),
           ],
