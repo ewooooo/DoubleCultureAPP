@@ -3,14 +3,17 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:qrscan/qrscan.dart' as scanner;
 
-class MyApp2 extends StatefulWidget{
+class QR extends StatefulWidget{
   @override
-  QR createState() => QR();
+  QR_state createState() => QR_state();
 }
 
-class QR extends State<MyApp2> {
-  String _output = '아래 버튼을 누른 뒤\n박물관의 QR코드를 인식해주세요';
+class QR_state extends State<QR> {
+  String _output = '좌측 버튼을 누른 뒤\n박물관의 QR코드를 인식해주세요';
   @override
+  initState() {
+    super.initState();
+  }
 
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -20,15 +23,24 @@ class QR extends State<MyApp2> {
           builder: (BuildContext context) {
             return Center(
               //정 가운데에 QR 스켄값 표시
-              child: Text(_output, style: TextStyle(color: Colors.black)),);
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  //플로팅 액션 버튼으로 qr 스캔 함수 실행
+                  FloatingActionButton(
+                    onPressed: () => _scan(),
+                    tooltip: 'scan',
+                    child: const Icon(Icons.camera_alt),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Text(_output, style: TextStyle(color: Colors.black)),
+                  ),
+                ],
+              ),);
           },
         ),
-        //플로팅 액션 버튼으로 qr 스캔 함수 실행
-        floatingActionButton: FloatingActionButton(
-          onPressed: () => _scan(),
-          tooltip: 'scan',
-          child: const Icon(Icons.camera_alt),
-        ),
+
       ),
     );
   }
