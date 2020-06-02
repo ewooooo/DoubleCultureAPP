@@ -27,7 +27,7 @@ class MyHomePage extends StatelessWidget{
           FlatButton(
               color: Colors.orangeAccent,
               onPressed: (){
-                server.getMuseum('소성박물관');
+                server.getToken('testid123123','admintest');
               },
               child: Text("GET")),
           FlatButton(
