@@ -45,7 +45,8 @@ class SMH extends StatelessWidget {
                                     fontWeight: FontWeight.bold,
                                     color: Colors.green,
                                   )),
-                              Text('오전 9시 ~ 오후 6시'),
+                              Text('오전 9시 ~ 오후 6시',
+                              ),
                               Text('(오후 5시까지 입장)'),
                               Text('휴관일',
                                 style: TextStyle(
@@ -54,13 +55,7 @@ class SMH extends StatelessWidget {
                                 ),
                               ),
                               Text('매달 첫째 월요일'),
-                              Text('전시해설 안내',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.green,
-                                ),
-                              ),
-                              Text('박물관 안내 자원봉사자의\n상시 해설안내 가능\n(소요시간 약 20분)'),
+
                             ],
                           ),
                         ),
@@ -68,12 +63,24 @@ class SMH extends StatelessWidget {
                     ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                          '수원박물관은 수원의 유구한 역사와 문화를 다양하게 보여주는 수원역사박물관과 한국서예사의 흐름을 한 눈에 볼 수 있는 한국서예박물관으로 구성되어있다.',
-                          style: TextStyle(
-                            fontSize: 15.0,
-                            color: Colors.black,
-                          )),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Text('전시해설 안내',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.green,
+                            ),
+                          ),
+                          Text('박물관 자원봉사자의 상시 해설안내 가능 (소요시간 약 20분)\n'),
+                          Text(
+                              ' 수원박물관은 수원의 유구한 역사와 문화를 다양하게 보여주는 수원역사박물관과 한국서예사의 흐름을 한 눈에 볼 수 있는 한국서예박물관으로 구성되어있다.',
+                              style: TextStyle(
+                                fontSize: 15.0,
+                                color: Colors.black,
+                              )),
+                        ],
+                      ),
                     ),
                     Padding(
                         padding: const EdgeInsets.all(8.0),
