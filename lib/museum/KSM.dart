@@ -8,16 +8,16 @@ class KSM extends StatelessWidget {
       appBar: AppBar(
         title: Text('경기대학교소성박물관'),
       ),
-      body: PageView(
-        children: <Widget>[
-          SingleChildScrollView(
-            child: Container(
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage('assets/background.jpg'),
-                  fit: BoxFit.cover,
-                ),
-              ),
+      body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/background.jpg'),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: PageView(
+          children: <Widget>[
+            SingleChildScrollView(
               child: Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: Column(
@@ -32,10 +32,8 @@ class KSM extends StatelessWidget {
                       children: <Widget>[
                         Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: SizedBox(
-                            child: Image.asset('assets/SS_KSM.jpg',
-                              width: MediaQuery.of(context).size.width/2.5,),
-                          ),
+                          child: Image.asset('assets/SS_KSM.jpg',
+                              width: MediaQuery.of(context).size.width/2.5),
                         ),
                         Padding(
                           padding: const EdgeInsets.all(8.0),
@@ -45,7 +43,7 @@ class KSM extends StatelessWidget {
                               Text('관람시간',
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
-                                    color: Colors.teal,
+                                    color: Colors.green,
                                   )),
                               Text('학기중 : 오전 10시 ~ 오후 5시'),
                               Text('방학중 : 오전 10시 ~ 오후 2시'),
@@ -53,7 +51,7 @@ class KSM extends StatelessWidget {
                                 '휴관일',
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
-                                  color: Colors.teal,
+                                  color: Colors.green,
                                 ),
                               ),
                               Text('토요일, 일요일 및 공휴일'),
@@ -79,17 +77,9 @@ class KSM extends StatelessWidget {
                 ),
               ),
             ),
-          ),
-          SingleChildScrollView(
-            child: Container(
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage('assets/background.jpg'),
-                  fit: BoxFit.cover,
-                ),
-              ),
+            SingleChildScrollView(
               child: Padding(
-                padding: const EdgeInsets.all(20.0),
+                padding: const EdgeInsets.all(36.0),
                 child: Column(
                   children: <Widget>[
                     Text(
@@ -116,44 +106,10 @@ class KSM extends StatelessWidget {
                 ),
               ),
             ),
-          ),
-          SingleChildScrollView(
-            child: Container(
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage('assets/background.jpg'),
-                  fit: BoxFit.cover,
-                ),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: Column(
-                  children: <Widget>[
-                    Text(
-                      '소감 작성\n',
-                    ),
-                    TextField(
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                        hintText: '여기에 입력하세요\n\n\n\n\n\n\n\n\n',
-                        hintMaxLines: 12,
-                        fillColor: Colors.white,
-                      ),
-                    ),
-                    RaisedButton(
-                      child: Text('제출'),
-                      color: Colors.white,
-                      onPressed: () {},
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
 }
+

@@ -6,7 +6,7 @@ class SMH extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('경기대학교소성박물관'),
+        title: Text('수원박물관'),
       ),
       body: Container(
         decoration: BoxDecoration(
@@ -19,10 +19,10 @@ class SMH extends StatelessWidget {
           children: <Widget>[
             SingleChildScrollView(
               child: Padding(
-                padding: const EdgeInsets.all(10.0),
+                padding: const EdgeInsets.all(20.0),
                 child: Column(
                   children: <Widget>[
-                    Text('경기대학교소성박물관',
+                    Text('수원박물관',
                         style: TextStyle(
                           fontSize: 34.0,
                           fontWeight: FontWeight.bold,
@@ -32,32 +32,35 @@ class SMH extends StatelessWidget {
                       children: <Widget>[
                         Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: SizedBox(
-                            width: 180,
-                            height: 120,
-                            child: Image.asset('assets/SS_KSM.jpg'),
-                          ),
+                          child: Image.asset('assets/SS_SMH.jpg',
+                              width: MediaQuery.of(context).size.width/2.5),
                         ),
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
                               Text('관람시간',
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     color: Colors.green,
                                   )),
-                              Text('학기중 : 오전 10시 ~ 오후 5시'),
-                              Text('방학중 : 오전 10시 ~ 오후 2시'),
-                              Text(
-                                '휴관일',
+                              Text('오전 9시 ~ 오후 6시'),
+                              Text('(오후 5시까지 입장)'),
+                              Text('휴관일',
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   color: Colors.green,
                                 ),
                               ),
-                              Text('토요일, 일요일 및 공휴일'),
-                              Text('매년 11월8일(개교기념일)'),
+                              Text('매달 첫째 월요일'),
+                              Text('전시해설 안내',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.green,
+                                ),
+                              ),
+                              Text('박물관 안내 자원봉사자의\n상시 해설안내 가능\n(소요시간 약 20분)'),
                             ],
                           ),
                         ),
@@ -66,7 +69,7 @@ class SMH extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
-                          '경기대학교소성박물관은 전국에서 수집한 농경민속품으로 국내 최초의 농경전시실을 개관하였고, 우리나라에서 가장 많은 민화를 수집하여 매년 특별전을 개최하고 있다. 또한 중요무형문화재 제 100호 옥장 장주원선생의 작품도 만나 볼 수 있다.',
+                          '수원박물관은 수원의 유구한 역사와 문화를 다양하게 보여주는 수원역사박물관과 한국서예사의 흐름을 한 눈에 볼 수 있는 한국서예박물관으로 구성되어있다.',
                           style: TextStyle(
                             fontSize: 15.0,
                             color: Colors.black,
@@ -81,45 +84,20 @@ class SMH extends StatelessWidget {
             ),
             SingleChildScrollView(
               child: Padding(
-                padding: const EdgeInsets.all(20.0),
+                padding: const EdgeInsets.all(36.0),
                 child: Column(
                   children: <Widget>[
                     Text(
                       '※ 다음 질문 중 한 가지를 선택하여 작성해주세요. (최소 6줄 이상 / 자유형식)\n',
                     ),
                     Text(
-                        '1. 광교 역사문화실에는 광교 신도시를 조성하며 출토된 발굴 유물들이 전시되어 있습니다. 전시장을 관람하고, 안동 김씨 문중이 살던 곳에서 출토된 유물들에 대해 적어보세요.\n'),
+                        '1. 박물관에서 소개하고 있는 ‘수원의 근대인물‘ 중 가장 인상 깊은 인물을 선택하고 그 이유를 서술하세요.\n'),
                     Text(
-                        '2. 2층은 기증자료실 (소강 민관식실, 사운 이종학실)로 구성되어 있습니다. 전시장을 관람한 뒤 가장 역사적 가치가 높다고 생각하는 사료 한 가지와 그것이 주는 의미를 기술해 보세요.\n'),
+                        '2. 1960년대 수원의 모습을 재현한 전시장을 관람하고, 오늘날 수원의 모습과 비교해보세요.\n'),
                     TextField(
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),
                         hintText: '여기에 입력하세요\n\n\n\n\n\n\n\n\n\n',
-                        hintMaxLines: 12,
-                        fillColor: Colors.white,
-                      ),
-                    ),
-                    RaisedButton(
-                      child: Text('제출'),
-                      color: Colors.white,
-                      onPressed: () {},
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            SingleChildScrollView(
-              child: Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: Column(
-                  children: <Widget>[
-                    Text(
-                      '소감 작성\n',
-                    ),
-                    TextField(
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                        hintText: '여기에 입력하세요\n\n\n\n\n\n\n\n\n',
                         hintMaxLines: 12,
                         fillColor: Colors.white,
                       ),

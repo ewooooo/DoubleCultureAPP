@@ -14,8 +14,7 @@ class Home extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.fromLTRB(6, 18, 6, 6),
           child: SizedBox(
-            width: 400,
-            height: 160,
+            width: MediaQuery.of(context).size.width/1,
             child: RaisedButton(
               child: Image.asset('assets/logo_KSM_1.gif'),
               padding: EdgeInsets.all(0.0),
@@ -36,8 +35,8 @@ class Home extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(6.0),
               child: SizedBox(
-                height: 160,
-                width: 190,
+                width: MediaQuery.of(context).size.width/2.2,
+
                 child: RaisedButton(
                   padding: const EdgeInsets.all(20.0),
                   child: Image.asset('assets/logo_SGM.gif'),
@@ -54,8 +53,7 @@ class Home extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(6.0),
               child: SizedBox(
-                height: 160,
-                width: 190,
+                width: MediaQuery.of(context).size.width/2.2,
                 child: RaisedButton(
                   padding: const EdgeInsets.all(20.0),
                   child: Image.asset('assets/logo_SMH.gif'),
@@ -78,8 +76,7 @@ class Home extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(6.0),
               child: SizedBox(
-                height: 160,
-                width: 190,
+                width: MediaQuery.of(context).size.width/2.2,
                 child: RaisedButton(
                   padding: const EdgeInsets.all(20.0),
                   child: Image.asset('assets/logo_SHM.gif'),
@@ -96,8 +93,7 @@ class Home extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(6.0),
               child: SizedBox(
-                height: 160,
-                width: 190,
+                width: MediaQuery.of(context).size.width/2.2,
                 child: RaisedButton(
                   padding: const EdgeInsets.all(20.0),
                   child: Image.asset('assets/logo_SHF.gif'),
