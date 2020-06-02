@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:qrscan/qrscan.dart' as scanner;
+import 'package:geolocator/geolocator.dart';
 
 class QR extends StatefulWidget{
   @override
@@ -9,7 +10,8 @@ class QR extends StatefulWidget{
 }
 
 class QR_state extends State<QR> {
-  String _output = '좌측 버튼을 누른 뒤\n박물관의 QR코드를 인식해주세요';
+  var _output = '좌측 버튼을 누른 뒤\n박물관의 QR코드를 인식해주세요';
+
   @override
   initState() {
     super.initState();
@@ -32,6 +34,11 @@ class QR_state extends State<QR> {
                     tooltip: 'scan',
                     child: const Icon(Icons.camera_alt),
                   ),
+                  FloatingActionButton(
+                    onPressed: () => print(getGPS()),
+                    tooltip: 'scan',
+                    child: const Icon(Icons.camera_alt),
+                  ),
                   Padding(
                     padding: const EdgeInsets.all(10.0),
                     child: Text(_output, style: TextStyle(color: Colors.black)),
@@ -51,6 +58,18 @@ class QR_state extends State<QR> {
     String barcode = await scanner.scan();
     //스캔 완료하면 _output 에 문자열 저장하면서 상태 변경 요청.
     print(barcode);
+
+    //Position position = getGPS();
+    //position.latitude;
+    //position.longitude;
     setState(() => _output = barcode);
+
+
+  }
+
+  Future<Position> getGPS() async{
+    Position position = await Geolocator().getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+    print(position);//어디디에 있어어어어ㅓ어어어ㅓ어어어ㅓ엉어어엉
+    return position;
   }
 }
