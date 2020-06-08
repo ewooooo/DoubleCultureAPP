@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import "package:doublecultureapp/plus/notice.dart";
+import "package:doublecultureapp/plus/key.dart";
 
 class Plus extends StatelessWidget{
   @override
