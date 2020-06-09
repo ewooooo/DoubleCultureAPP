@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 class KSM extends StatelessWidget {
 
   String museumName;
-  String quiz;
+  String quiz1, quiz2, quiz3;
   bool stempState; //스템프 찍었는지 여부
   TextEditingController textController = new TextEditingController();
 
@@ -97,7 +97,13 @@ class KSM extends StatelessWidget {
                 child: Column(
                   children: <Widget>[
                     Text(
-                      quiz,
+                      quiz1,
+                    ),
+                    Text(
+                      quiz2,
+                    ),
+                    Text(
+                      quiz3,
                     ),
                     TextField(
                       controller: textController,

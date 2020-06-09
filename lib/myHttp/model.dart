@@ -1,19 +1,23 @@
 class Museum {
   final String museumName;
-  final String quiz;
+  final String quiz1,quiz2,quiz3;
 
-  Museum({this.museumName, this.quiz});
+  Museum({this.museumName, this.quiz1,this.quiz2,this.quiz3});
 
   factory Museum.fromJson(Map<String, dynamic> json) {
     return Museum(
       museumName: json['institution_number'],
-      quiz: json['quiz'],
+      quiz1: json['quiz1'],
+      quiz2: json['quiz2'],
+      quiz3: json['quiz3'],
     );
   }
   Map<String,dynamic> toJson() =>
       {
         'institution_number' : museumName,
-        'quiz' : quiz,
+        'quiz1' : quiz1,
+        'quiz2' : quiz2,
+        'quiz3' : quiz3,
       };
 }
 

@@ -42,8 +42,21 @@ class Home extends StatelessWidget {
                   KSM page = KSM();
 
                   page.museumName = museum.museumName;
-                  page.quiz = museum.quiz;
-                  print(museum.quiz);
+                  if (museum.quiz1 != "")
+                    page.quiz1 = museum.quiz1+"\n";
+                  else
+                    page.quiz1 = museum.quiz1;
+                  if (museum.quiz2 != "")
+                    page.quiz2 = museum.quiz2+"\n";
+                  else
+                    page.quiz2 = museum.quiz2;
+
+                  if (museum.quiz3 != "")
+                    page.quiz3 = museum.quiz3+"\n";
+                  else
+                    page.quiz3 = museum.quiz3;
+
+
                   page.textController.text = userMuseum.quiz_answer;
                   page.stempState = userMuseum.stampStatus;
 
