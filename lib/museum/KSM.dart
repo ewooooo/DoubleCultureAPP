@@ -7,16 +7,12 @@ import 'package:flutter/material.dart';
 
 
 class KSM extends StatelessWidget {
-<<<<<<< HEAD
-  var _quizController = TextEditingController();
-=======
+
   String museumName;
   String quiz;
   bool stempState; //스템프 찍었는지 여부
   TextEditingController textController = new TextEditingController();
 
-
->>>>>>> 4d94253bc81e394a370d567b8741a8192d9593e1
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -103,16 +99,8 @@ class KSM extends StatelessWidget {
                     Text(
                       quiz,
                     ),
-                    Text(
-                        '1. 광교 역사문화실에는 광교 신도시를 조성하며 출토된 발굴 유물들이 전시되어 있습니다. 전시장을 관람하고, 안동 김씨 문중이 살던 곳에서 출토된 유물들에 대해 적어보세요.\n'),
-                    Text(
-                        '2. 2층은 기증자료실 (소강 민관식실, 사운 이종학실)로 구성되어 있습니다. 전시장을 관람한 뒤 가장 역사적 가치가 높다고 생각하는 사료 한 가지와 그것이 주는 의미를 기술해 보세요.\n'),
                     TextField(
-<<<<<<< HEAD
-                      controller: _quizController,
-=======
                       controller: textController,
->>>>>>> 4d94253bc81e394a370d567b8741a8192d9593e1
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),
                         hintText: '여기에 입력하세요\n\n\n\n\n\n\n\n\n\n',

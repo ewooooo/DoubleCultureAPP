@@ -1,3 +1,4 @@
+
 import 'package:doublecultureapp/data/UserData.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -42,6 +43,7 @@ class Home extends StatelessWidget {
 
                   page.museumName = museum.museumName;
                   page.quiz = museum.quiz;
+                  print(museum.quiz);
                   page.textController.text = userMuseum.quiz_answer;
                   page.stempState = userMuseum.stampStatus;
 
