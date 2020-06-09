@@ -20,14 +20,19 @@ dependencies:
   flutter:
     sdk: flutter
   provider: ^3.1.0+1
-
+  fluttertoast: ^4.0.1
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
   qrscan: ^0.2.17
   http: ^0.12.0+4
   geolocator: ^5.3.1
+<<<<<<< HEAD
   fluttertoast: ^4.0.1
+=======
+
+
+>>>>>>> 4d94253bc81e394a370d567b8741a8192d9593e1
 dev_dependencies:
   flutter_test:
     sdk: flutter
