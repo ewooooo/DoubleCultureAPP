@@ -1,7 +1,16 @@
+import 'package:doublecultureapp/data/UserData.dart';
+import 'package:doublecultureapp/myHttp/AdapHttp.dart';
+import 'package:doublecultureapp/myHttp/model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class SHF extends StatelessWidget {
+
+  String museumName;
+  String quiz1, quiz2, quiz3;
+  bool stempState; //스템프 찍었는지 여부
+  TextEditingController textController = new TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -94,13 +103,11 @@ class SHF extends StatelessWidget {
                 padding: const EdgeInsets.all(36.0),
                 child: Column(
                   children: <Widget>[
-                    Text(
-                      '※ 다음 질문 중 한 가지를 선택하여 작성해주세요. (최소 6줄 이상 / 자유형식)\n',
-                    ),
-                    Text(
-                        'Coming soon,,\n'),
-                    Text('\n'),
+                    Text(quiz1),
+                    Text(quiz2),
+                    Text(quiz3),
                     TextField(
+                      controller: textController,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),
                         hintText: '여기에 입력하세요\n\n\n\n\n\n\n\n\n\n',
@@ -111,7 +118,19 @@ class SHF extends StatelessWidget {
                     RaisedButton(
                       child: Text('제출'),
                       color: Colors.white,
-                      onPressed: () {},
+                      onPressed: () async {
+                        UserMuseum testMuseum = await server.postUserMuseum( museumName, textController.text);
+                        if (testMuseum == null){
+                          Token token = await server.getToken(userData.username,userData.password);
+                          testMuseum = await server.postUserMuseum( museumName, textController.text);
+                        }else{
+                          if (testMuseum.stampStatus == this.stempState || testMuseum.quiz_answer == this.textController.text ){
+                            printToast("성공적으로 등록되었습니다.");
+                          }else{
+                            printToast("다시한번 시도해주세요. \n 안내메시지가 계속 나올시 연락부탁드립니다.");
+                          }
+                        }
+                      },
                     ),
                   ],
                 ),

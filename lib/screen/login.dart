@@ -6,7 +6,7 @@ import 'package:doublecultureapp/main.dart';
 import 'package:doublecultureapp/myHttp/AdapHttp.dart';
 import 'package:doublecultureapp/myHttp/model.dart';
 import 'package:doublecultureapp/data/UserData.dart';
-
+import './singUp.dart';
 class AuthPage extends StatelessWidget {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
@@ -23,11 +23,6 @@ class AuthPage extends StatelessWidget {
       body: Stack(
         alignment: Alignment.center,
         children: <Widget>[
-          CustomPaint(
-            size: size,
-            painter: LoginBackground(
-                isJoin: Provider.of<JoinOrLogin>(context).isJoin),
-          ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
@@ -37,26 +32,63 @@ class AuthPage extends StatelessWidget {
                 children: <Widget>[
                   //inputform & 버튼
                   _inputForm(size),
-                  _authButton(size),
                 ],
               ),
+
+            SizedBox(
+              height: 50,
+              width: size.width*0.6,
+              child: RaisedButton(
+                  child: Text(
+                    "로그인",
+                    style: TextStyle(fontSize: 20, color: Colors.white),
+                  ),
+                  color: Colors.blue,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(25)),
+                  onPressed: () async {
+                    if (_formKey.currentState.validate()) { //formkey를 가져와서 currentstate를 확인하고 validate를 실행해서 이 안의 Text가 우리가 원하는 건지 확인해서 아니면 에러를 내보내고 맞으면
+                      String id = _emailController.text;
+                      String pw = _passwordController.text;
+                      Token token = await server.getToken(id, pw);
+                      if (token == null) {
+                        printToast("아이디 or 비밀번호를 확인하세요.");
+                      } else {
+                        userData = UserData(id, pw);
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => MyHomePage()),
+                        );
+                      }
+                    }
+                  },
+              ),
+            ),
               Container(
-                height: size.height * 0.1,
-              ), // gap
-              Consumer<JoinOrLogin>(
-                builder: (context, joinOrLogin, child) => GestureDetector(
-                    onTap: () {
-                      joinOrLogin.toggle(); //UI클릭시 toggle이 실행이 되고, 그렇게 되면 isJoin이 true로 바뀌고 notifilistener를 통해 사용중인 위젯들에게 모두 알림
-                    },
-                    child: Text(
-                      joinOrLogin.isJoin ? "계정이 이미 존재한다면 로그인 해주세요." : "계정이 없다면 회원가입하세요.",
-                      style: TextStyle(
-                          color: joinOrLogin.isJoin ? Colors.red : Colors.blue),
-                    )),
+                height: size.height * 0.02,
+              ),
+            SizedBox(
+              height: 50,
+              width: size.width*0.6,
+                child: RaisedButton(
+                  child: Text(
+                    "회원가입",
+                    style: TextStyle(fontSize: 20, color: Colors.white),
+                  ),
+                  color: Colors.blue,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(25)),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => SingUp()),
+                    );
+                  },
+                ),
               ),
               Container(
                 height: size.height * 0.05,
-              ) // gap
+              ),// gap
             ],
           ),
         ],
@@ -79,42 +111,7 @@ class AuthPage extends StatelessWidget {
     ),
   );
 
-  Widget _authButton(Size size) => Positioned(
-    left: size.width * 0.15,
-    right: size.width * 0.15,
-    bottom: 0,
-    child: SizedBox(
-      height: 50,
-      child: Consumer<JoinOrLogin>(
-        builder: (context, joinOrLogin, child) => RaisedButton(
-            child: Text(
-              joinOrLogin.isJoin?"Join":"Login",
-              style: TextStyle(fontSize: 20, color: Colors.white),
-            ),
-            color: joinOrLogin.isJoin?Colors.red:Colors.blue,
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(25)),
-            onPressed: () async{
-              if (_formKey.currentState.validate()) { //formkey를 가져와서 currentstate를 확인하고 validate를 실행해서 이 안의 Text가 우리가 원하는 건지 확인해서 아니면 에러를 내보내고 맞으면
-                String id = _emailController.text;
-                String pw = _passwordController.text;
-                Token token = await server.getToken(id, pw);
-                if (token == null){
-                  printToast("아이디 or 비밀번호를 확인하세요.");
-                }else{
-                  userData = UserData(id,pw);
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => MyHomePage()),
-                  );
-                }
-              }
 
-
-            },),
-      ),
-    ),
-  );
 
 
   Widget _inputForm(Size size) {
@@ -163,11 +160,11 @@ class AuthPage extends StatelessWidget {
                       return null;
                     },
                   ),
-                  Consumer<JoinOrLogin>(
-                    builder: (context, value, child) => Opacity(
-                        opacity: value.isJoin? 0 : 1, //opacity = 투명함
-                        child: Text("비밀번호를 잊어버렸습니다.")),
+                  Container(
+                    height: 5,
                   ),
+                   Text("비밀번호를 잊어버린경우 관리자에게 문의하세요."),
+
                 ],
               )),
         ),

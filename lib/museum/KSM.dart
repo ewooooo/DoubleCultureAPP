@@ -5,7 +5,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 
-
 class KSM extends StatelessWidget {
 
   String museumName;
@@ -96,15 +95,9 @@ class KSM extends StatelessWidget {
                 padding: const EdgeInsets.all(36.0),
                 child: Column(
                   children: <Widget>[
-                    Text(
-                      quiz1,
-                    ),
-                    Text(
-                      quiz2,
-                    ),
-                    Text(
-                      quiz3,
-                    ),
+                    Text(quiz1),
+                    Text(quiz2),
+                    Text(quiz3),
                     TextField(
                       controller: textController,
                       decoration: InputDecoration(

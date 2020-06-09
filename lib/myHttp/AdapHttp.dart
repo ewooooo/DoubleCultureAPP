@@ -50,7 +50,7 @@ class Server {
   }
 
   Future<int> singUp(String username, String password, String re_password,
-      String email, String first_name, String last_name) async {
+      String email, String first_name, String last_name, String joinkey) async {
     final http.Response response = await http.post(
       _API_PREFIX + "app/singUp/",
       headers: <String, String>{
@@ -63,7 +63,9 @@ class Server {
             're_password': re_password,
             'email': email,
             'first_name': first_name,
-            'last_name': last_name
+            'last_name': last_name,
+            'joinkey' : joinkey,
+            'appkey' : '940109'
           }
       ),
     );
@@ -73,6 +75,8 @@ class Server {
       return 3; // 중복아이디 체크
     } else if (response.statusCode == 400) {
       return 2; // 빈칸이나 비번 확인필요
+    } else if (response.statusCode == 401) {
+      return 4; // 빈칸이나 비번 확인필요
     } else {
       // If the server did not return a 200 OK response, then throw an exception.
       printToast("서버와 연결이 원활하지 않습니다. \n 관리자에게 문의해주세요.");
