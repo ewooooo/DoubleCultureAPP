@@ -1,4 +1,5 @@
 // 경기대학교 소성박물관 1차 UI
+import 'package:doublecultureapp/data/UserData.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:doublecultureapp/screen/login.dart';
@@ -8,6 +9,9 @@ import "package:doublecultureapp/menu/home.dart";
 import "package:doublecultureapp/menu/QR.dart";
 import "package:doublecultureapp/menu/review.dart";
 import "package:doublecultureapp/menu/plus.dart";
+
+import 'myHttp/AdapHttp.dart';
+import 'myHttp/model.dart';
 
 void main() => runApp(MyApp());
 
@@ -29,13 +33,14 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-//남은우바보
+
 class MyHomePage extends StatefulWidget {
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  Review reviewPage;
   var _index = 0; //페이지 인덱스 0,1,2
   var _menu = [
     Home(),
@@ -54,9 +59,10 @@ class _MyHomePageState extends State<MyHomePage> {
       body: _menu[_index],
       bottomNavigationBar: BottomNavigationBar(
         onTap: (index) {
-          setState(
+          setState (
                 () {
               _index = index;
+
             },
           );
         },

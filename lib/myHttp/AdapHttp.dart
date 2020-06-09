@@ -237,6 +237,51 @@ class Server {
     }
   }
 
+  Future<UserFeel> postFeel(String feelData) async {
+    final http.Response response = await http.put(
+      _API_PREFIX + "app/feel/",
+      headers: <String, String>{
+        'Authorization': "jwt " + token,
+        'Content-Type': 'application/json'
+      },
+      body: jsonEncode(
+          {
+            'feel' : feelData
+          }
+      ),
+    );
+    if (response.statusCode == 200) {
+      String body = utf8.decode(response.bodyBytes);
+      dynamic j = json.decode(body);
+      UserFeel uf = UserFeel.fromJson(j);
+      return uf;
+    } else {
+      return null;
+    }
+  }
+
+  Future<UserFeel> getFeel() async {
+    final http.Response response = await http.get(
+      _API_PREFIX + "app/feel/",
+      headers: <String, String>{
+        'Authorization': "jwt " + token,
+        'Content-Type': 'application/json'
+      },
+    );
+    if (response.statusCode == 200) {
+      String body = utf8.decode(response.bodyBytes);
+      dynamic j = json.decode(body);
+      UserFeel uf = UserFeel.fromJson(j);
+      return uf;
+    } else if (response.statusCode == 401) {
+      return null;
+    } else {
+      printToast("서버와 연결이 원활하지 않습니다. \n 관리자에게 문의해주세요.");
+      // If the server did not return a 200 OK response, then throw an exception.
+      throw Exception('Failed to connection');
+    }
+  }
+
   Future<Museum> getMuseum(String id) async {
     final http.Response response = await http.get(
       _API_PREFIX + "app/museum/$id/",
@@ -262,6 +307,32 @@ class Server {
       return false;
     }
   }
+
+
+  Future<UserFeel> getCoumunity(String feelData) async {
+    final http.Response response = await http.put(
+      _API_PREFIX + "app/feel/",
+      headers: <String, String>{
+        'Authorization': "jwt " + token,
+        'Content-Type': 'application/json'
+      },
+      body: jsonEncode(
+          {
+            'feel' : feelData
+          }
+      ),
+    );
+    if (response.statusCode == 200) {
+      String body = utf8.decode(response.bodyBytes);
+      dynamic j = json.decode(body);
+      UserFeel uf = UserFeel.fromJson(j);
+      return uf;
+    } else {
+      return null;
+    }
+  }
+
+
 }
 
 Server server = Server();

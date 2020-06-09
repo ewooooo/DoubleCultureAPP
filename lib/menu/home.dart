@@ -79,11 +79,43 @@ class Home extends StatelessWidget {
                   padding: const EdgeInsets.all(20.0),
                   child: Image.asset('assets/logo_SGM.gif'),
                   color: Colors.white,
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => SGM()),
-                    );
+                  onPressed: () async{
+
+                    String museumNmae = "수원광교박물관";
+                    Museum museum = await server.getMuseum(museumNmae);
+                    if (museum == null){
+                      printToast("서버와 연결이 원활하지 않습니다. \n 관리자에게 문의해주세요.");
+
+                    }else {
+                      UserMuseum userMuseum = await server.getUserMuseum(museumNmae);
+                      if (userMuseum == null) {
+                        Token token = await server.getToken(userData.username, userData.password);
+                        userMuseum = await server.getUserMuseum(museumNmae);
+                      }
+                      SGM page = SGM();
+
+                      page.museumName = museum.museumName;
+                      if (museum.quiz1 != "")
+                        page.quiz1 = museum.quiz1+"\n";
+                      else
+                        page.quiz1 = museum.quiz1;
+                      if (museum.quiz2 != "")
+                        page.quiz2 = museum.quiz2+"\n";
+                      else
+                        page.quiz2 = museum.quiz2;
+
+                      if (museum.quiz3 != "")
+                        page.quiz3 = museum.quiz3+"\n";
+                      else
+                        page.quiz3 = museum.quiz3;
+                      page.textController.text = userMuseum.quiz_answer;
+                      page.stempState = userMuseum.stampStatus;
+
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => page),
+                      );
+                    }
                   },
                 ),
               ),

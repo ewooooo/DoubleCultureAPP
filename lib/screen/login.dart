@@ -1,3 +1,4 @@
+import 'package:doublecultureapp/menu/review.dart';
 import 'package:flutter/material.dart';
 import 'package:doublecultureapp/data/join_or_login.dart';
 import 'package:doublecultureapp/helper/login_background.dart';
@@ -55,6 +56,12 @@ class AuthPage extends StatelessWidget {
                         printToast("아이디 or 비밀번호를 확인하세요.");
                       } else {
                         userData = UserData(id, pw);
+                        UserFeel userfeel = await server.getFeel();
+                        if (userfeel == null){
+                          Token to = await server.getToken(userData.username, userData.password);
+                          userfeel = await server.getFeel();
+                        }
+                        feelController.text = userfeel.feel;
                         Navigator.push(
                           context,
                           MaterialPageRoute(builder: (context) => MyHomePage()),

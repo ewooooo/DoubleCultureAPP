@@ -21,6 +21,20 @@ class Museum {
       };
 }
 
+class UserFeel {
+  final String feel;
+  UserFeel({this.feel});
+  factory UserFeel.fromJson(Map<String, dynamic> json) {
+    return UserFeel(
+      feel: json['feel'],
+    );
+  }
+  Map<String,dynamic> toJson() =>
+      {
+        'feel' : feel,
+      };
+}
+
 class User{
   final String username;
   final String email;
