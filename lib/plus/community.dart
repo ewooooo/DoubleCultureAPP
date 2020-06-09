@@ -43,6 +43,19 @@ class _CommunityState extends State<Community> {
     );
   }
 
+  void _addTodo(Todo todo){
+    setState((){
+      _items.add(todo);
+      _todoController.text='';
+    });
+  }
+
+  void _deleteTodo(Todo todo){
+    setState(() {
+      _items.remove(todo);
+    });
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -65,7 +78,7 @@ class _CommunityState extends State<Community> {
           ),
           Expanded(
             child: ListView(
-              children: <Widget>[],
+              children: _items.map((todo)=> _buildItemWidget(todo)).toList(),
             ),
           )
         ],
