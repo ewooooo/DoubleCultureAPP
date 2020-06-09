@@ -9,7 +9,6 @@ import "package:doublecultureapp/menu/QR.dart";
 import "package:doublecultureapp/menu/review.dart";
 import "package:doublecultureapp/menu/plus.dart";
 
-
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {

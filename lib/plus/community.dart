@@ -1,8 +1,18 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+
+void showToast(String message){
+  Fluttertoast.showToast(
+    msg: message,
+    backgroundColor: Colors.white,
+    toastLength: Toast.LENGTH_SHORT,
+    gravity: ToastGravity.BOTTOM,
+  );
+}
 
 class Todo{
-  bool isDone = false;
+  String userId = '123';
   String title;
   
   Todo(this.title);
@@ -14,6 +24,8 @@ class Community extends StatefulWidget {
 }
 
 class _CommunityState extends State<Community> {
+
+  String loginId = '123';
   final _items = <Todo>[];
   var _todoController = TextEditingController();
 
@@ -27,18 +39,15 @@ class _CommunityState extends State<Community> {
   Widget _buildItemWidget(Todo todo){
     return ListTile(
       onTap:(){},
+      leading: Text(
+        todo.userId
+      ),
       title: Text(
         todo.title,
-        style: todo.isDone
-          ? TextStyle(
-          decoration: TextDecoration.lineThrough,
-          fontStyle: FontStyle.italic,
-        )
-            :null,
       ),
       trailing: IconButton(
         icon: Icon(Icons.delete_forever),
-        onPressed:(){},
+        onPressed:()=>_deleteTodo(todo),
       ),
     );
   }
@@ -51,9 +60,15 @@ class _CommunityState extends State<Community> {
   }
 
   void _deleteTodo(Todo todo){
-    setState(() {
-      _items.remove(todo);
-    });
+    if (loginId==todo.userId) {
+      setState(() {
+        _items.remove(todo);
+      });
+    }else{
+      //setState(() {
+        //showToast('삭제할 수 없습니다');
+      //});
+    }
   }
 
   Widget build(BuildContext context) {
@@ -61,27 +76,30 @@ class _CommunityState extends State<Community> {
       appBar: AppBar(
         title: Text('커뮤니티'),
       ),
-      body: Column(
-        children: <Widget>[
-          Row(
-            children: <Widget>[
-              Expanded(
-                child:TextField(
-                  controller: _todoController,
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          children: <Widget>[
+            Row(
+              children: <Widget>[
+                Expanded(
+                  child:TextField(
+                    controller: _todoController,
+                  ),
                 ),
-              ),
-              RaisedButton(
-                child:Text('등록'),
-                onPressed: (){},
-              ),
-            ],
-          ),
-          Expanded(
-            child: ListView(
-              children: _items.map((todo)=> _buildItemWidget(todo)).toList(),
+                RaisedButton(
+                  child:Text('등록'),
+                  onPressed: ()=>_addTodo(Todo(_todoController.text)),
+                ),
+              ],
             ),
-          )
-        ],
+            Expanded(
+              child: ListView(
+                children: _items.map((todo)=> _buildItemWidget(todo)).toList(),
+              ),
+            )
+          ],
+        ),
       )
     );
   }

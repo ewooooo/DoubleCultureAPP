@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class KSM extends StatelessWidget {
+  var _quizController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -90,6 +91,7 @@ class KSM extends StatelessWidget {
                     Text(
                         '2. 2층은 기증자료실 (소강 민관식실, 사운 이종학실)로 구성되어 있습니다. 전시장을 관람한 뒤 가장 역사적 가치가 높다고 생각하는 사료 한 가지와 그것이 주는 의미를 기술해 보세요.\n'),
                     TextField(
+                      controller: _quizController,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),
                         hintText: '여기에 입력하세요\n\n\n\n\n\n\n\n\n\n',

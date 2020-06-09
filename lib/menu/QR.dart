@@ -36,6 +36,7 @@ class QR_state extends State<QR> {
                   ),
                   FloatingActionButton(
                     onPressed: () => print(getGPS()),
+                    //onPressed: (){showToast('메세지');},
                     tooltip: 'scan',
                     child: const Icon(Icons.camera_alt),
                   ),

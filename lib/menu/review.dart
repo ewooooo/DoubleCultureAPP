@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+
 class Review extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -22,7 +23,8 @@ class Review extends StatelessWidget {
           RaisedButton(
             child: Text('제출'),
             color: Colors.white,
-            onPressed: () {},
+            onPressed: () {
+              },
           ),
         ],
       ),
