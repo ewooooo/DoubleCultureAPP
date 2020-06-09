@@ -1,28 +1,19 @@
 class Museum {
   final String museumName;
-  final String hoToGo;
-  final String quiz1;
-  final String quiz2;
-  final String quiz3;
+  final String quiz;
 
-  Museum({this.museumName, this.hoToGo,this.quiz1,this.quiz2,this.quiz3});
+  Museum({this.museumName, this.quiz});
 
   factory Museum.fromJson(Map<String, dynamic> json) {
     return Museum(
       museumName: json['institution_number'],
-      hoToGo: json['howtogo'],
-      quiz1: json['quiz1'],
-      quiz2: json['quiz2'],
-      quiz3: json['quiz3'],
+      quiz: json['quiz'],
     );
   }
   Map<String,dynamic> toJson() =>
       {
         'institution_number' : museumName,
-        'howtogo' : hoToGo,
-        'quiz1' : quiz1,
-        'quiz2' : quiz2,
-        'quiz3' : quiz3,
+        'quiz' : quiz,
       };
 }
 
@@ -56,27 +47,20 @@ class User{
 
 class UserMuseum{
   final bool stampStatus;
-  final String quiz1_answer;
-  final String quiz2_answer;
-  final String quiz3_answer;
+  final String quiz_answer;
 
-
-  UserMuseum({this.stampStatus, this.quiz1_answer, this.quiz2_answer, this.quiz3_answer});
+  UserMuseum({this.stampStatus, this.quiz_answer});
 
   factory UserMuseum.fromJson(Map<String, dynamic> json) {
     return UserMuseum(
       stampStatus: json['stampStatus'],
-      quiz1_answer: json['quiz1_answer'],
-      quiz2_answer : json['quiz2_answer'],
-      quiz3_answer: json['quiz3_answer'],
+      quiz_answer: json['quiz_answer'],
     );
   }
   Map<String,dynamic> toJson() =>
       {
         "stampStatus": stampStatus,
-        "quiz1_answer": quiz1_answer,
-        "quiz2_answer": quiz2_answer,
-        "quiz3_answer": quiz3_answer,
+        "quiz_answer": quiz_answer,
       };
 }
 

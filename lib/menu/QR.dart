@@ -1,9 +1,10 @@
+import 'package:doublecultureapp/myHttp/AdapHttp.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:qrscan/qrscan.dart' as scanner;
 import 'package:geolocator/geolocator.dart';
-
+import 'package:doublecultureapp/myHttp/AdapHttp.dart';
 class QR extends StatefulWidget{
   @override
   QR_state createState() => QR_state();
@@ -57,19 +58,20 @@ class QR_state extends State<QR> {
     //스캔 시작 - 이때 스캔 될때까지 blocking
     String barcode = await scanner.scan();
     //스캔 완료하면 _output 에 문자열 저장하면서 상태 변경 요청.
-    print(barcode);
 
-    //Position position = getGPS();
-    //position.latitude;
-    //position.longitude;
+
+    Position position = await getGPS();
+
     setState(() => _output = barcode);
+    printToast("QR: " + barcode);
+    printToast("lat: "+ position.latitude.toString() +" long: " + position.longitude.toString());
 
-
+    await server.updateStemp(barcode,position.latitude,position.longitude);
   }
 
   Future<Position> getGPS() async{
     Position position = await Geolocator().getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
-    print(position);//어디디에 있어어어어ㅓ어어어ㅓ어어어ㅓ엉어어엉
+    print(position);
     return position;
   }
 }

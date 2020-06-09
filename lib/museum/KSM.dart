@@ -1,7 +1,18 @@
+import 'package:doublecultureapp/data/UserData.dart';
+import 'package:doublecultureapp/myHttp/AdapHttp.dart';
+import 'package:doublecultureapp/myHttp/model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+
+
 class KSM extends StatelessWidget {
+  String museumName;
+  String quiz;
+  bool stempState; //스템프 찍었는지 여부
+  TextEditingController textController = new TextEditingController();
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,7 +44,10 @@ class KSM extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Image.asset('assets/SS_KSM.jpg',
-                              width: MediaQuery.of(context).size.width/2.5),
+                              width: MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width / 2.5),
                         ),
                         Padding(
                           padding: const EdgeInsets.all(8.0),
@@ -83,13 +97,14 @@ class KSM extends StatelessWidget {
                 child: Column(
                   children: <Widget>[
                     Text(
-                      '※ 다음 질문 중 한 가지를 선택하여 작성해주세요. (최소 6줄 이상 / 자유형식)\n',
+                      quiz,
                     ),
                     Text(
                         '1. 광교 역사문화실에는 광교 신도시를 조성하며 출토된 발굴 유물들이 전시되어 있습니다. 전시장을 관람하고, 안동 김씨 문중이 살던 곳에서 출토된 유물들에 대해 적어보세요.\n'),
                     Text(
                         '2. 2층은 기증자료실 (소강 민관식실, 사운 이종학실)로 구성되어 있습니다. 전시장을 관람한 뒤 가장 역사적 가치가 높다고 생각하는 사료 한 가지와 그것이 주는 의미를 기술해 보세요.\n'),
                     TextField(
+                      controller: textController,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),
                         hintText: '여기에 입력하세요\n\n\n\n\n\n\n\n\n\n',
@@ -100,7 +115,19 @@ class KSM extends StatelessWidget {
                     RaisedButton(
                       child: Text('제출'),
                       color: Colors.white,
-                      onPressed: () {},
+                      onPressed: () async {
+                        UserMuseum testMuseum = await server.postUserMuseum( museumName, textController.text);
+                        if (testMuseum == null){
+                          Token token = await server.getToken(userData.username,userData.password);
+                          testMuseum = await server.postUserMuseum( museumName, textController.text);
+                        }else{
+                          if (testMuseum.stampStatus == this.stempState || testMuseum.quiz_answer == this.textController.text ){
+                            printToast("성공적으로 등록되었습니다.");
+                          }else{
+                            printToast("다시한번 시도해주세요. \n 안내메시지가 계속 나올시 연락부탁드립니다.");
+                          }
+                        }
+                      },
                     ),
                   ],
                 ),
@@ -112,4 +139,3 @@ class KSM extends StatelessWidget {
     );
   }
 }
-

@@ -4,6 +4,9 @@ import 'package:doublecultureapp/helper/login_background.dart';
 import "package:provider/provider.dart";
 import 'package:doublecultureapp/main.dart';
 import 'package:doublecultureapp/myHttp/AdapHttp.dart';
+import 'package:doublecultureapp/myHttp/model.dart';
+import 'package:doublecultureapp/data/UserData.dart';
+
 class AuthPage extends StatelessWidget {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
@@ -92,21 +95,22 @@ class AuthPage extends StatelessWidget {
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(25)),
             onPressed: () async{
-
-              if (await server.serverTest()){
-                Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => MyHomePage()),
-              );
-
+              if (_formKey.currentState.validate()) { //formkey를 가져와서 currentstate를 확인하고 validate를 실행해서 이 안의 Text가 우리가 원하는 건지 확인해서 아니면 에러를 내보내고 맞으면
+                String id = _emailController.text;
+                String pw = _passwordController.text;
+                Token token = await server.getToken(id, pw);
+                if (token == null){
+                  printToast("아이디 or 비밀번호를 확인하세요.");
+                }else{
+                  userData = UserData(id,pw);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => MyHomePage()),
+                  );
+                }
               }
 
 
-
-              //if (_formKey.currentState.validate()) {
-              //formkey를 가져와서 currentstate를 확인하고 validate를 실행해서 이 안의 Text가 우리가 원하는 건지 확인해서 아니면 에러를 내보내고 맞으면
-              //print(_passwordController.text.toString());
-              //}
             },),
       ),
     ),
