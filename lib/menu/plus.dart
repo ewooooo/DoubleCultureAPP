@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import "package:doublecultureapp/plus/notice.dart";
 import "package:doublecultureapp/plus/bus.dart";
+import "package:doublecultureapp/plus/community.dart";
 
 class Plus extends StatelessWidget{
   @override
@@ -45,7 +46,7 @@ class Plus extends StatelessWidget{
           onTap:(){
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => Notice()),
+              MaterialPageRoute(builder: (context) => Community()),
             );
           },
         ),

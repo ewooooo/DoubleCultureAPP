@@ -97,3 +97,4 @@ class Token{
         "token": token,
       };
 }
+
