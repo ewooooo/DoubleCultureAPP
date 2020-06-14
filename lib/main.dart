@@ -26,10 +26,11 @@ class MyApp extends StatelessWidget {
         accentColor: const Color(0xFF3f51b5),
         canvasColor: const Color(0xFFaabdf5),
       ),
+      //home:MyHomePage(),
       home: ChangeNotifierProvider<JoinOrLogin>.value(
           value: JoinOrLogin(),
           child: AuthPage()
-      ),
+      )
     );
   }
 }

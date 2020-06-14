@@ -9,7 +9,7 @@ class Suwonmuseumbelt extends StatelessWidget {
         title: Text('버스정보 지도'),
       ),
       body: SingleChildScrollView(
-        child: Image.asset('assets/suwonmuseumbelt1.png'),
+        child: Image.asset('assets/bus_map.png'),
       ),
     );
   } // 6번, 400번, 400-4번, 700-2번 4가지 버스 정보 하단에 추가 예정

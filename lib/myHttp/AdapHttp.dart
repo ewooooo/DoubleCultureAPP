@@ -20,7 +20,7 @@ void printToast(String mesg){
   );
 }
 
-const _API_PREFIX = "http://ec2-3-135-161-59.us-east-2.compute.amazonaws.com/"; //HTTP 주소
+const _API_PREFIX = "ec2-18-216-189-42.us-east-2.compute.amazonaws.com"; //HTTP 주소
 
 class Server {
   String token = "";

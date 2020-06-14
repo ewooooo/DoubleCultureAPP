@@ -5,6 +5,7 @@ import "package:doublecultureapp/plus/bus.dart";
 import "package:doublecultureapp/plus/community.dart";
 import "package:doublecultureapp/screen/login.dart";
 import "package:doublecultureapp/plus/change_PW.dart";
+import "package:doublecultureapp/plus/check.dart";
 
 class Plus extends StatelessWidget{
   @override
@@ -18,7 +19,7 @@ class Plus extends StatelessWidget{
           onTap:(){
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => Notice()),
+              MaterialPageRoute(builder: (context) => Completion()),
             );
           },
         ),
