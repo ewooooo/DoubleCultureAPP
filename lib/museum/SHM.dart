@@ -11,6 +11,16 @@ class SHM extends StatelessWidget {
   String quiz1, quiz2, quiz3;
   bool stempState; //스템프 찍었는지 여부
   TextEditingController textController = new TextEditingController();
+  String stp;
+
+  stamp(stempSt){
+    if(stempSt==true){
+      stp='assets/STAMP_SHM.png';
+    }else{
+      stp = 'assets/STAMP_EMPTY.png';
+    }
+    return stp;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -94,7 +104,7 @@ class SHM extends StatelessWidget {
                     ),
                     Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Image.asset('assets/STAMP_EMPTY.png')),
+                        child: Image.asset(stamp(stempState))),
                   ],
                 ),
               ),
