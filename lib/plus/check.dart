@@ -1,3 +1,6 @@
+import 'package:doublecultureapp/data/UserData.dart';
+import 'package:doublecultureapp/myHttp/AdapHttp.dart';
+import 'package:doublecultureapp/myHttp/model.dart';
 import 'package:doublecultureapp/plus/bus.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -26,11 +29,27 @@ class Completion extends StatelessWidget {
           RaisedButton(
             child: Text('관리자에게 요청', style: TextStyle(color: Colors.red)),
             color: Colors.white,
-            onPressed: () {
-              Navigator.push(//관리자 서버와 이수여부 확인 연동하기!!!
-                context,
-                MaterialPageRoute(builder: (context) => Check_yes_or_no()),
-              );
+            onPressed: () async{
+
+                User user = await server.getUser();
+                if (user == null) {
+                  Token token = await server.getToken(userData.username, userData.password);
+                  User user = await server.getUser();
+                }else{
+                  Check_yes_or_no page = Check_yes_or_no();
+                  page.name = user.firstName;
+                  page.studentID = user.username;
+                  if(user.status){
+                    page.isoo = "정상 수료 되었습니다.";
+                  }else{
+                    page.isoo = "수료가 되지 않았습니다.";
+                  }
+                  Navigator.push(//관리자 서버와 이수여부 확인 연동하기!!!
+                    context,
+                    MaterialPageRoute(builder: (context) => page),
+                  );
+                }
+
             },
           ),
           Text('\n  문제발생시 연락주세요.\n        031-249-1483\n    (경기대 소성박물관)'),
@@ -41,6 +60,9 @@ class Completion extends StatelessWidget {
 }
 
 class Check_yes_or_no extends StatelessWidget {
+  String studentID = "";
+  String name = "";
+  String isoo = "";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,6 +76,46 @@ class Check_yes_or_no extends StatelessWidget {
             image: AssetImage('assets/background.jpg'),
             fit: BoxFit.cover,
           ),
+        ),
+        padding: const EdgeInsets.all(120.0),
+        child: Column(
+
+          children: <Widget>[
+
+            Column(children: <Widget>[
+
+              Text('최종이수여부\n',
+                  style: TextStyle(color: Colors.black, fontSize: 20.0)),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text('이름 :   '),
+                  Text(name),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text('학번 :    '),
+                  Text(studentID),
+                ],
+              ),
+              Container(
+                height: 10,
+              ), // gat
+              Icon(
+                Icons.local_airport
+              ),
+              Column(
+                children: <Widget>[
+                  Text("\n"+isoo,
+                      style: TextStyle(color: Colors.black, fontSize: 12.0)),
+                ],
+              ),
+              //body
+
+            ]),
+          ],
         ),
       ),
     );

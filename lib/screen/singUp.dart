@@ -15,7 +15,6 @@ class SingUp extends StatelessWidget {
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _repasswordController = TextEditingController();
   final TextEditingController _firstNameController = TextEditingController();
-  final TextEditingController _lastNameController = TextEditingController();
   final TextEditingController _securityKeyController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
 
@@ -51,7 +50,7 @@ class SingUp extends StatelessWidget {
                 onPressed: () async {
                   if(_formKey.currentState.validate()){
                     int result = await server.singUp(_usernameController.text, _passwordController.text, _repasswordController.text, _emailController.text,
-                        _firstNameController.text, _lastNameController.text,  _securityKeyController.text);
+                        _firstNameController.text,  _securityKeyController.text);
                     if (result == 1){
                       printToast("회원가입이 성공적으로 가입되었습니다.");
                       Navigator.push(
@@ -175,7 +174,7 @@ class SingUp extends StatelessWidget {
                     controller: _firstNameController,
                     decoration: InputDecoration(
                         icon: Icon(Icons.account_circle),
-                        labelText: "firstName"),
+                        labelText: "이름"),
                     validator: (String value) {
                       // validator : 유저가 작성 뒤 로그인 버튼 누를 때 이메일필드에 작성한 내용을 가져와서 옳은지 체크
                       if (value.isEmpty) {
@@ -188,24 +187,6 @@ class SingUp extends StatelessWidget {
                   ),
                   Container(
                     height: 3,
-                  ),
-                  TextFormField(
-                    controller: _lastNameController,
-                    decoration: InputDecoration(
-                        icon: Icon(Icons.account_circle),
-                        labelText: "lastName"),
-                    validator: (String value) {
-                      // validator : 유저가 작성 뒤 로그인 버튼 누를 때 이메일필드에 작성한 내용을 가져와서 옳은지 체크
-                      if (value.isEmpty) {
-                        return "lastName를 기입하세요.";
-                      }else if(validNumbers.hasMatch(value)) {
-                        return "이름만 입력하세요.";
-                      }
-                      return null;
-                    },
-                  ),
-                  Container(
-                    height:3,
                   ),
                   TextFormField(
                     controller: _emailController,

@@ -1,6 +1,7 @@
 import 'package:doublecultureapp/data/UserData.dart';
 import 'package:doublecultureapp/myHttp/AdapHttp.dart';
 import 'package:doublecultureapp/myHttp/model.dart';
+import 'package:doublecultureapp/screen/login.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -58,7 +59,7 @@ class ChangePW extends StatelessWidget {
               child: Text('확인'),
               color: Colors.white,
               onPressed: () async {
-                if (nowController.text!=userData.password) {
+                if (nowController.text != userData.password) {
                   printToast("현재 비밀번호가 틀립니다.");
                 } else {
                   if (newController.text == neewController.text) {
@@ -67,8 +68,17 @@ class ChangePW extends StatelessWidget {
                   } else {
                     printToast("새 비밀번호가 일치하지 않습니다");
                   }
-                };
-                },
+                }
+                ;
+
+                if (await server.postPassword(nowController.text,
+                    newController.text, neewController.text)) {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => AuthPage()),
+                  );
+                }
+              },
             ),
           ],
         ),

@@ -50,7 +50,7 @@ class Server {
   }
 
   Future<int> singUp(String username, String password, String re_password,
-      String email, String first_name, String last_name, String joinkey) async {
+      String email, String first_name, String joinkey) async {
     final http.Response response = await http.post(
       _API_PREFIX + "app/singUp/",
       headers: <String, String>{
@@ -63,7 +63,6 @@ class Server {
             're_password': re_password,
             'email': email,
             'first_name': first_name,
-            'last_name': last_name,
             'joinkey' : joinkey,
             'appkey' : '940109'
           }
@@ -151,6 +150,40 @@ class Server {
       return u;
     } else if(response.statusCode == 401){
       return null;
+    } else {
+      // If the server did not return a 200 OK response, then throw an exception.
+      printToast("서버와 연결이 원활하지 않습니다. \n 관리자에게 문의해주세요.");
+      // If the server did not return a 200 OK response, then throw an exception.
+      throw Exception('Failed to load Museum');
+    }
+  }
+
+
+  Future<bool> postPassword(String password, String newPassword, String newPasswoedRe ) async {
+    final http.Response response = await http.put(
+      _API_PREFIX + "app/login/",
+      headers: <String, String>{
+        'Authorization': "jwt " + token,
+        'Content-Type': 'application/json'
+      },
+      body: jsonEncode(
+          {
+            'password' : password,
+            'new_password': newPassword,
+            'new_password_re': newPasswoedRe
+          }
+      ),
+    );
+
+    if (response.statusCode == 200) {
+      printToast("비밀번호가 성공적으로 변경되었습니다.");
+      return true;
+    } else if(response.statusCode == 402){
+      printToast("두 비밀번호가 다름니다.");
+      return false;
+    } else if(response.statusCode == 400){
+      printToast("현재 비밀번호가 다릅니다.");
+      return false;
     } else {
       // If the server did not return a 200 OK response, then throw an exception.
       printToast("서버와 연결이 원활하지 않습니다. \n 관리자에게 문의해주세요.");

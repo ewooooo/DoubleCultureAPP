@@ -39,17 +39,15 @@ class User{
   final String username;
   final String email;
   final String firstName;
-  final String lastName;
   final bool status;
 
-  User({this.username, this.email, this.firstName, this.lastName, this.status});
+  User({this.username, this.email, this.firstName, this.status});
 
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
       username: json['username'],
       email: json['email'],
       firstName : json['first_name'],
-      lastName: json['last_name'],
       status: json['student_data'],
     );
   }
@@ -58,7 +56,6 @@ class User{
         "username": username,
         "email": email,
         "first_name": firstName,
-        "last_name": lastName,
         "student_data": status,
       };
 }
