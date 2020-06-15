@@ -68,8 +68,8 @@ class KSM extends StatelessWidget {
                                     fontWeight: FontWeight.bold,
                                     color: Colors.green,
                                   )),
-                              Text('학기중 : 오전 10시 ~ 오후 5시'),
-                              Text('방학중 : 오전 10시 ~ 오후 2시'),
+                              Text('오전 10시 ~ 오후 5시'),
+                              Text('(방학기간은 2시까지)'),
                               Text(
                                 '휴관일',
                                 style: TextStyle(
@@ -78,7 +78,7 @@ class KSM extends StatelessWidget {
                                 ),
                               ),
                               Text('토요일, 일요일 및 공휴일'),
-                              Text('매년 11월8일(개교기념일)'),
+                              Text('11월 8일(개교기념일)'),
                             ],
                           ),
                         ),
