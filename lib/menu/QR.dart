@@ -35,12 +35,7 @@ class QR_state extends State<QR> {
                     tooltip: 'scan',
                     child: const Icon(Icons.camera_alt),
                   ),
-                  FloatingActionButton(
-                    onPressed: () => print(getGPS()),
-                    //onPressed: (){showToast('메세지');},
-                    tooltip: 'scan',
-                    child: const Icon(Icons.camera_alt),
-                  ),
+
                   Padding(
                     padding: const EdgeInsets.all(10.0),
                     child: Text(_output, style: TextStyle(color: Colors.black)),
