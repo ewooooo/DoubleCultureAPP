@@ -3,6 +3,7 @@ import 'package:doublecultureapp/data/UserData.dart';
 import 'package:doublecultureapp/myHttp/model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class Todo {
   //String userId=userData.username;
@@ -80,10 +81,10 @@ class _CommunityState extends State<Community> {
     if(_todoController.text==''){
       printToast('내용을 입력해주세요');
     }else{
-    setState(() {
-      _items.insert(0, todo);
-      _todoController.text = '';
-    });
+      setState(() {
+        _items.insert(0, todo);
+        _todoController.text = '';
+      });
     }
   }
 
@@ -135,7 +136,7 @@ class _CommunityState extends State<Community> {
                 Expanded(
                   child: ListView(
                     children:
-                        _items.map((todo) => myScreen(todo)).toList(),
+                    _items.map((todo) => myScreen(todo)).toList(),
                   ),
                 )
               ],
@@ -145,4 +146,7 @@ class _CommunityState extends State<Community> {
       ),
     );
   }
+
+
+
 }

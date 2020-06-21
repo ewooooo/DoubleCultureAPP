@@ -347,7 +347,7 @@ class Server {
 
   Future<List<post_model>> getCoumunity(int pageNum) async {
     final http.Response response = await http.get(
-      _API_PREFIX + "/app/community/$pageNum/",
+      _API_PREFIX + "/app/community_gd/$pageNum/",
       headers: <String, String>{
         'Authorization': "jwt " + token,
         'Content-Type': 'application/json'
@@ -370,7 +370,7 @@ class Server {
 
   Future<bool> postCoumunity(String text) async {
     final http.Response response = await http.post(
-      _API_PREFIX + "/app/community",
+      _API_PREFIX + "/app/community/",
       headers: <String, String>{
         'Authorization': "jwt " + token,
         'Content-Type': 'application/json'
@@ -390,7 +390,7 @@ class Server {
 
   Future<bool> delCoumunity(int pageNum) async {
     final http.Response response = await http.delete(
-      _API_PREFIX + "/app/community$pageNum/",
+      _API_PREFIX + "/app/community_gd/$pageNum/",
       headers: <String, String>{
         'Authorization': "jwt " + token,
         'Content-Type': 'application/json'
