@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:doublecultureapp/myHttp/AdapHttp.dart';
-import 'package:doublecultureapp/myHttp/model.dart';
 
-
-
-import 'login.dart';
 
 class SingUp extends StatelessWidget {
   final validAlphabet = RegExp(r'[a-zA-Z]');
@@ -53,10 +49,7 @@ class SingUp extends StatelessWidget {
                         _firstNameController.text,  _securityKeyController.text);
                     if (result == 1){
                       printToast("회원가입이 성공적으로 가입되었습니다.");
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => AuthPage()),
-                      );
+                      Navigator.pop(context);
                     }else if(result == 2){
                       printToast("입력정보가 잘못되었습니다. 반복시 문의바랍니다.");
                     }else if(result == 4){
@@ -64,7 +57,6 @@ class SingUp extends StatelessWidget {
                     }else if(result == 3){
                       printToast("아이디가 중복되어습니다.");
                     }
-                    
                   }
                 },
               ),
@@ -84,10 +76,7 @@ class SingUp extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(25)),
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => AuthPage()),
-                  );
+                  Navigator.pop(context);
                 },
               ),
             ),

@@ -1,7 +1,6 @@
 import 'package:doublecultureapp/myHttp/AdapHttp.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 class Todo {
   String userId = '201611500';

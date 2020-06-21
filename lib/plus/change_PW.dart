@@ -1,7 +1,5 @@
 import 'package:doublecultureapp/data/UserData.dart';
 import 'package:doublecultureapp/myHttp/AdapHttp.dart';
-import 'package:doublecultureapp/myHttp/model.dart';
-import 'package:doublecultureapp/screen/login.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -82,10 +80,8 @@ class ChangePW extends StatelessWidget {
 
                 if (await server.postPassword(nowController.text,
                     newController.text, neewController.text)) {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => AuthPage()),
-                  );
+                  Navigator.pop(context);
+                  Navigator.pop(context);
                 }
               },
             ),

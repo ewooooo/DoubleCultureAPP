@@ -1,8 +1,5 @@
 import 'package:doublecultureapp/menu/review.dart';
 import 'package:flutter/material.dart';
-import 'package:doublecultureapp/data/join_or_login.dart';
-import 'package:doublecultureapp/helper/login_background.dart';
-import "package:provider/provider.dart";
 import 'package:doublecultureapp/main.dart';
 import 'package:doublecultureapp/myHttp/AdapHttp.dart';
 import 'package:doublecultureapp/myHttp/model.dart';
@@ -25,14 +22,14 @@ class _AuthPageState extends State<AuthPage> {
     return showDialog(
           context: context,
           builder: (context) => AlertDialog(
-            title: Text("정말로 끝낼꺼야?"),
+            title: Text("exit?"),
             actions: <Widget>[
               FlatButton(
-                child: Text("그럴꺼야"),
+                child: Text("ok"),
                 onPressed: () => Navigator.pop(context, true),
               ),
               FlatButton(
-                child: Text("아뉘야"),
+                child: Text("cacel"),
                 onPressed: () => Navigator.pop(context, false),
               ),
             ],

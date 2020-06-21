@@ -1,7 +1,6 @@
 import 'package:doublecultureapp/data/UserData.dart';
 import 'package:doublecultureapp/myHttp/AdapHttp.dart';
 import 'package:doublecultureapp/myHttp/model.dart';
-import 'package:doublecultureapp/plus/bus.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
