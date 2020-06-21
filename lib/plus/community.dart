@@ -71,6 +71,7 @@ class _CommunityState extends State<Community> {
             decoration: BoxDecoration(
               image: DecorationImage(
                 image: AssetImage('assets/background.jpg'),
+                fit: BoxFit.cover,
               ),
             ),
           ),
