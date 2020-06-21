@@ -97,3 +97,18 @@ class Token{
       };
 }
 
+class post_model {
+  final String id;
+  final String author;
+  final String text;
+
+  post_model({this.id, this.author,this.text});
+
+  factory post_model.fromJson(Map<String, dynamic> json) {
+    return post_model(
+      id: json['id'],
+      author: json['author'],
+      text: json['text'],
+    );
+  }
+}
