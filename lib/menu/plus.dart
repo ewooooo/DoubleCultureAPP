@@ -1,3 +1,5 @@
+import 'package:doublecultureapp/myHttp/AdapHttp.dart';
+import 'package:doublecultureapp/myHttp/model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import "package:doublecultureapp/plus/notice.dart";
@@ -6,7 +8,7 @@ import "package:doublecultureapp/plus/community.dart";
 import "package:doublecultureapp/screen/login.dart";
 import "package:doublecultureapp/plus/change_PW.dart";
 import "package:doublecultureapp/plus/check.dart";
-
+import 'package:doublecultureapp/data/UserData.dart';
 class Plus extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
@@ -46,7 +48,14 @@ class Plus extends StatelessWidget{
         ListTile(
           title: Text('커뮤니티'),
           trailing: Icon(Icons.navigate_next),
-          onTap:(){
+          onTap:() async{
+
+            items = await server.getCoumunity(1);
+            if (items == null) {
+              Token token = await server.getToken(
+                  userData.username, userData.password);
+              items = await server.getCoumunity(1);
+            }
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => Community()),
