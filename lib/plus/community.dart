@@ -1,9 +1,10 @@
 import 'package:doublecultureapp/myHttp/AdapHttp.dart';
+import 'package:doublecultureapp/data/UserData.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Todo {
-  String userId = '201611500';
+  String userId=userData.username;
   String title;
 
   Todo(this.title);
@@ -15,7 +16,7 @@ class Community extends StatefulWidget {
 }
 
 class _CommunityState extends State<Community> {
-  String loginId = '201611500';
+
   final _items = <Todo>[];
   var _todoController = TextEditingController();
 
@@ -24,6 +25,7 @@ class _CommunityState extends State<Community> {
     _todoController.dispose();
     super.dispose();
   }
+
 
   Widget _buildItemWidget(Todo todo) {
     return ListTile(
@@ -40,14 +42,18 @@ class _CommunityState extends State<Community> {
   }
 
   void _addTodo(Todo todo) {
+    if(_todoController.text==''){
+      printToast('내용을 입력해주세요');
+    }else{
     setState(() {
-      _items.add(todo);
+      _items.insert(0, todo);
       _todoController.text = '';
     });
+    }
   }
 
   void _deleteTodo(Todo todo) {
-    if (loginId == todo.userId) {
+    if (userData.username== todo.userId) {
       setState(() {
         _items.remove(todo);
       });

@@ -10,7 +10,17 @@ import "package:doublecultureapp/plus/check.dart";
 class Plus extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
-    return ListView(
+    return Stack(
+        children: <Widget>[
+    Container(
+    decoration: BoxDecoration(
+        image: DecorationImage(
+        image: AssetImage('assets/background.jpg'),
+    fit: BoxFit.cover,
+    ),
+    ),
+    ),
+    ListView(
       scrollDirection: Axis.vertical,
       children: <Widget>[
         ListTile(
@@ -74,6 +84,8 @@ class Plus extends StatelessWidget{
           },
         ),
       ],
+    ),
+    ],
     );
   }
 }

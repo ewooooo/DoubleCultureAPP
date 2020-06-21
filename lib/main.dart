@@ -20,9 +20,9 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
         title: 'Flutter Demo',
         theme: ThemeData(
-          primarySwatch: Colors.indigo,
-          primaryColor: const Color(0xFF3f51b5),
-          accentColor: const Color(0xFF3f51b5),
+          primarySwatch: Colors.orange,
+          primaryColor: const Color(0xFF1a2d74),
+          accentColor: const Color(0xFF1a2d74),
           canvasColor: const Color(0xFFaabdf5),
         ),
         //home:MyHomePage(),
@@ -88,21 +88,21 @@ class _MyHomePageState extends State<MyHomePage> {
               BottomNavigationBarItem(
                   icon: Icon(Icons.home),
                   title: Text('홈 화면'),
-                  backgroundColor: Colors.indigo),
+                  backgroundColor: Color(0xFF1a2d74)),
               BottomNavigationBarItem(
                   icon: Icon(Icons.photo_camera),
                   title: Text('QR코드'),
-                  backgroundColor: Colors.indigo),
+                  backgroundColor: Color(0xFF1a2d74)),
               BottomNavigationBarItem(
                   icon: Icon(Icons.pages),
                   title: Text('소감작성'),
-                  backgroundColor: Colors.indigo),
+                  backgroundColor: Color(0xFF1a2d74)),
               BottomNavigationBarItem(
                   icon: Icon(Icons.add_circle),
                   title: Text('더보기'),
-                  backgroundColor: Colors.indigo),
+                  backgroundColor: Color(0xFF1a2d74)),
             ],
-            selectedItemColor: Colors.lightGreenAccent,
+            selectedItemColor: Color(0xFFf5fd9b),
           ),
         ));
   }
