@@ -1,20 +1,13 @@
 // 경기대학교 소성박물관 1차 UI
-import 'package:doublecultureapp/data/UserData.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:doublecultureapp/screen/login.dart';
-import 'package:doublecultureapp/data/join_or_login.dart';
-import 'package:provider/provider.dart';
 import "package:doublecultureapp/menu/home.dart";
 import "package:doublecultureapp/menu/QR.dart";
 import "package:doublecultureapp/menu/review.dart";
 import "package:doublecultureapp/menu/plus.dart";
 
-import 'myHttp/AdapHttp.dart';
-import 'myHttp/model.dart';
-
 void main() => runApp(MyApp());
-
 
 class MyApp extends StatefulWidget {
   @override
@@ -25,19 +18,15 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.indigo,
-        primaryColor: const Color(0xFF3f51b5),
-        accentColor: const Color(0xFF3f51b5),
-        canvasColor: const Color(0xFFaabdf5),
-      ),
-      //home:MyHomePage(),
-      home: ChangeNotifierProvider<JoinOrLogin>.value(
-          value: JoinOrLogin(),
-          child: AuthPage()
-      )
-    );
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          primarySwatch: Colors.indigo,
+          primaryColor: const Color(0xFF3f51b5),
+          accentColor: const Color(0xFF3f51b5),
+          canvasColor: const Color(0xFFaabdf5),
+        ),
+        //home:MyHomePage(),
+        home: AuthPage());
   }
 }
 
@@ -56,45 +45,65 @@ class _MyHomePageState extends State<MyHomePage> {
     Plus(),
   ];
 
+  Future<bool> _onBackPressed() {
+    return showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: Text("exit?"),
+            actions: <Widget>[
+              FlatButton(
+                child: Text("ok"),
+                onPressed: () => Navigator.pop(context, true),
+              ),
+              FlatButton(
+                child: Text("cacel"),
+                onPressed: () => Navigator.pop(context, false),
+              ),
+            ],
+          ),
+        ) ??
+        false;
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('학교 밖 수원을 보다'),
-        centerTitle: true,
-      ),
-      body: _menu[_index],
-      bottomNavigationBar: BottomNavigationBar(
-        onTap: (index) {
-          setState (
+    return WillPopScope(
+        onWillPop: _onBackPressed,
+        child: Scaffold(
+          appBar: AppBar(
+            title: Text('학교 밖 수원을 보다'),
+            centerTitle: true,
+          ),
+          body: _menu[_index],
+          bottomNavigationBar: BottomNavigationBar(
+            onTap: (index) {
+              setState(
                 () {
-              _index = index;
-
+                  _index = index;
+                },
+              );
             },
-          );
-        },
-        currentIndex: _index,
-        items: [
-          BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              title: Text('홈 화면'),
-              backgroundColor: Colors.indigo),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.photo_camera),
-              title: Text('QR코드'),
-              backgroundColor: Colors.indigo),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.pages),
-              title: Text('소감작성'),
-              backgroundColor: Colors.indigo),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.add_circle),
-              title: Text('더보기'),
-              backgroundColor: Colors.indigo),
-        ],
-        selectedItemColor: Colors.lightGreenAccent,
-      ),
-    );
+            currentIndex: _index,
+            items: [
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.home),
+                  title: Text('홈 화면'),
+                  backgroundColor: Colors.indigo),
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.photo_camera),
+                  title: Text('QR코드'),
+                  backgroundColor: Colors.indigo),
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.pages),
+                  title: Text('소감작성'),
+                  backgroundColor: Colors.indigo),
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.add_circle),
+                  title: Text('더보기'),
+                  backgroundColor: Colors.indigo),
+            ],
+            selectedItemColor: Colors.lightGreenAccent,
+          ),
+        ));
   }
 }
-

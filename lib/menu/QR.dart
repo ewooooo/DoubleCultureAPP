@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:qrscan/qrscan.dart' as scanner;
 import 'package:geolocator/geolocator.dart';
-import 'package:doublecultureapp/myHttp/AdapHttp.dart';
 class QR extends StatefulWidget{
   @override
   QR_state createState() => QR_state();
