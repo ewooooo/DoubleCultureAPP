@@ -98,7 +98,7 @@ class Token{
 }
 
 class post_model {
-  final String id;
+  final int id;
   final String author;
   final String text;
 

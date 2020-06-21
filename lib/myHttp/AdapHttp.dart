@@ -354,15 +354,15 @@ class Server {
       },
     );
     if (response.statusCode == 200) {
-    
       String body = utf8.decode(response.bodyBytes);
       dynamic j = json.decode(body);
-      List<post_model> list_post;
+
+      List<post_model> list_post = [];
       for(var i in j){
-        list_post.add(post_model.fromJson(j));
+        post_model pm = post_model.fromJson(i);
+        list_post.add(pm);
       }
       return list_post;
-
     } else {
       return null;
     }
@@ -381,9 +381,10 @@ class Server {
           }
       ),
     );
-    if (response.statusCode == 200) {
+    if (response.statusCode == 201) {
       return true;
     } else {
+      print(response.statusCode);
       return false;
     }
   }
@@ -396,7 +397,7 @@ class Server {
         'Content-Type': 'application/json'
       },
     );
-    if (response.statusCode == 200) {
+    if (response.statusCode == 204) {
       return true;
     } else {
       return false;
