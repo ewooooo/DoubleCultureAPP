@@ -5,17 +5,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class SHF extends StatelessWidget {
-
   String museumName;
   String quiz1, quiz2, quiz3;
   bool stempState; //스템프 찍었는지 여부
   TextEditingController textController = new TextEditingController();
   String stp;
 
-  stamp(stempSt){
-    if(stempSt==true){
-      stp='assets/STAMP_SHF.png';
-    }else{
+  stamp(stempSt) {
+    if (stempSt == true) {
+      stp = 'assets/STAMP_SHF.png';
+    } else {
       stp = 'assets/STAMP_EMPTY.png';
     }
     return stp;
@@ -26,6 +25,7 @@ class SHF extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('수원화성'),
+        centerTitle: true,
       ),
       body: Container(
         decoration: BoxDecoration(
@@ -52,7 +52,7 @@ class SHF extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Image.asset('assets/SS_SHF.jpg',
-                              width: MediaQuery.of(context).size.width/2.5),
+                              width: MediaQuery.of(context).size.width / 2.5),
                         ),
                         Padding(
                           padding: const EdgeInsets.all(8.0),
@@ -64,17 +64,18 @@ class SHF extends StatelessWidget {
                                     fontWeight: FontWeight.bold,
                                     color: Colors.green,
                                   )),
-                              Text('동절기(3~10월) : \n오전 9시 ~ 오후 6시',
+                              Text(
+                                '동절기(3~10월) : \n오전 9시 ~ 오후 6시',
                               ),
                               Text('하절기(11~2월) : \n오전 9시 ~ 오후 5시'),
-                              Text('휴관일',
+                              Text(
+                                '휴관일',
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   color: Colors.green,
                                 ),
                               ),
                               Text('매달 첫째 월요일'),
-
                             ],
                           ),
                         ),
@@ -85,7 +86,8 @@ class SHF extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Text('전시해설 안내',
+                          Text(
+                            '전시해설 안내',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               color: Colors.green,
@@ -129,15 +131,25 @@ class SHF extends StatelessWidget {
                       child: Text('제출'),
                       color: Colors.white,
                       onPressed: () async {
-                        UserMuseum testMuseum = await server.postUserMuseum( museumName, textController.text);
-                        if (testMuseum == null){
-                          Token token = await server.getToken(userData.username,userData.password);
-                          testMuseum = await server.postUserMuseum( museumName, textController.text);
-                        }else{
-                          if (testMuseum.stampStatus == this.stempState || testMuseum.quiz_answer == this.textController.text ){
-                            printToast("성공적으로 등록되었습니다.");
-                          }else{
-                            printToast("다시한번 시도해주세요. \n 안내메시지가 계속 나올시 연락부탁드립니다.");
+                        if (textController.text.length < 16) {
+                          printToast("글자수를 15 이상 넘겨주세요.");
+                        } else {
+                          UserMuseum testMuseum = await server.postUserMuseum(
+                              museumName, textController.text);
+                          if (testMuseum == null) {
+                            Token token = await server.getToken(
+                                userData.username, userData.password);
+                            testMuseum = await server.postUserMuseum(
+                                museumName, textController.text);
+                          } else {
+                            if (testMuseum.stampStatus == this.stempState ||
+                                testMuseum.quiz_answer ==
+                                    this.textController.text) {
+                              printToast("성공적으로 등록되었습니다.");
+                            } else {
+                              printToast(
+                                  "다시한번 시도해주세요. \n 안내메시지가 계속 나올시 연락부탁드립니다.");
+                            }
                           }
                         }
                       },
@@ -152,4 +164,3 @@ class SHF extends StatelessWidget {
     );
   }
 }
-

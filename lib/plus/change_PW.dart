@@ -17,8 +17,17 @@ class ChangePW extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('비밀번호 변경'),
+        centerTitle: true,
       ),
-      body: Padding(
+      body: Stack(children: <Widget>[
+      Container(
+      decoration: BoxDecoration(
+          image: DecorationImage(
+          image: AssetImage('assets/background.jpg'),
+    ),
+    ),
+    ),
+      Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(
           children: <Widget>[
@@ -82,6 +91,8 @@ class ChangePW extends StatelessWidget {
             ),
           ],
         ),
+      ),
+    ],
       ),
     );
   }

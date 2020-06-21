@@ -67,7 +67,7 @@ class Plus extends StatelessWidget{
           title: Text('로그아웃'),
           trailing: Icon(Icons.navigate_next),
           onTap:(){
-            Navigator.push(
+            Navigator.pop(
               context,
               MaterialPageRoute(builder: (context) => AuthPage()),
             );

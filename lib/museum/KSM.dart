@@ -27,6 +27,7 @@ class KSM extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('경기대학교소성박물관'),
+        centerTitle: true,
       ),
       body: Container(
         decoration: BoxDecoration(
@@ -48,6 +49,7 @@ class KSM extends StatelessWidget {
                           fontWeight: FontWeight.bold,
                           color: Colors.indigo,
                         )),
+
                     Row(
                       children: <Widget>[
                         Padding(
@@ -121,15 +123,25 @@ class KSM extends StatelessWidget {
                       child: Text('제출'),
                       color: Colors.white,
                       onPressed: () async {
-                        UserMuseum testMuseum = await server.postUserMuseum( museumName, textController.text);
-                        if (testMuseum == null){
-                          Token token = await server.getToken(userData.username,userData.password);
-                          testMuseum = await server.postUserMuseum( museumName, textController.text);
-                        }else{
-                          if (testMuseum.stampStatus == this.stempState || testMuseum.quiz_answer == this.textController.text ){
-                            printToast("성공적으로 등록되었습니다.");
-                          }else{
-                            printToast("다시한번 시도해주세요. \n 안내메시지가 계속 나올시 연락부탁드립니다.");
+                        if (textController.text.length < 16){
+                        printToast("글자수를 15 이상 넘겨주세요.");
+                        }else {
+                          UserMuseum testMuseum = await server.postUserMuseum(
+                              museumName, textController.text);
+                          if (testMuseum == null) {
+                            Token token = await server.getToken(
+                                userData.username, userData.password);
+                            testMuseum = await server.postUserMuseum(
+                                museumName, textController.text);
+                          } else {
+                            if (testMuseum.stampStatus == this.stempState ||
+                                testMuseum.quiz_answer ==
+                                    this.textController.text) {
+                              printToast("성공적으로 등록되었습니다.");
+                            } else {
+                              printToast(
+                                  "다시한번 시도해주세요. \n 안내메시지가 계속 나올시 연락부탁드립니다.");
+                            }
                           }
                         }
                       },

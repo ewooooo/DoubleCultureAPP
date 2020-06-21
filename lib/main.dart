@@ -15,7 +15,13 @@ import 'myHttp/model.dart';
 
 void main() => runApp(MyApp());
 
-class MyApp extends StatelessWidget {
+
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -54,7 +60,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('HOME'),
+        title: Text('학교 밖 수원을 보다'),
         centerTitle: true,
       ),
       body: _menu[_index],
