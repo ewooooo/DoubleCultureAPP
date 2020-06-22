@@ -57,7 +57,7 @@ class Plus extends StatelessWidget{
             );
           },
         ),
-
+/*
         ListTile(
           title: Text('커뮤니티'),
           trailing: Icon(Icons.navigate_next),
@@ -74,7 +74,7 @@ class Plus extends StatelessWidget{
               MaterialPageRoute(builder: (context) => Community()),
             );
           },
-        ),
+        ),*/
         ListTile(
           title: Text('비밀번호 변경'),
           trailing: Icon(Icons.navigate_next),
@@ -98,7 +98,14 @@ class Plus extends StatelessWidget{
         ListTile(
           title: Text('테스트'),
           trailing: Icon(Icons.navigate_next),
-          onTap:(){
+          onTap:() async{
+
+            items = await server.getCoumunity(1);
+            if (items == null) {
+              Token token = await server.getToken(
+                  userData.username, userData.password);
+              items = await server.getCoumunity(1);
+            }
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => Community2()),

@@ -7,34 +7,104 @@ import 'dart:async';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 
+List<post_model> items;
+
 class Community2 extends StatefulWidget {
   @override
   _Community2State createState() => _Community2State();
 }
 
 class _Community2State extends State<Community2> {
-  //List<post_model> items;
-  List<String> items = ["1", "2", "3", "4", "5", "6", "7", "8"];
+
   RefreshController _refreshController =
       RefreshController(initialRefresh: false);
+
+  void dispose() {
+    _todoController.dispose();
+    super.dispose();
+
+  }
+
+  void _addTodo(String text) async {
+    if(text==''){
+      printToast('내용을 입력해주세요');
+    }else {
+      if (await server.postCoumunity(text)) {
+        printToast("등록");
+      } else {
+        Token to = await server.getToken(userData.username, userData.password);
+        await server.postCoumunity(text);
+      }
+
+      items = await server.getCoumunity(1);
+      if (items == null) {
+        Token token = await server.getToken(
+            userData.username, userData.password);
+        items = await server.getCoumunity(1);
+      }
+    }
+    setState(() {
+      _todoController.text = '';
+    });
+  }
+
+  void _deleteTodo(post_model todo) async{
+    if (userData.username == todo.author) {
+      if(await server.delCoumunity(todo.id)){
+        printToast("삭제");
+      }else{
+        Token to = await server.getToken(userData.username, userData.password);
+        await server.delCoumunity(todo.id);
+      }
+
+      items = await server.getCoumunity(1);
+      if (items == null) {
+        Token token = await server.getToken(
+            userData.username, userData.password);
+        items = await server.getCoumunity(1);
+      }
+      setState(() {
+      });
+    } else {
+      //setState(() {
+      printToast('삭제할 수 없습니다');
+      //});
+    }
+  }
 
   void _onRefresh() async {
     // monitor network fetch
     await Future.delayed(Duration(milliseconds: 1000));
+    items = await server.getCoumunity(1);
+    if (items == null) {
+      Token token = await server.getToken(
+          userData.username, userData.password);
+      items = await server.getCoumunity(1);
+    }
     // if failed,use refreshFailed()
     _refreshController.refreshCompleted();
   }
 
+  int currentPage = 1;
+
   void _onLoading() async {
     // monitor network fetch
     await Future.delayed(Duration(milliseconds: 1000));
+    items += await server.getCoumunity(currentPage+1);
+    currentPage+=1;
+    if (items == null) {
+      Token token = await server.getToken(
+          userData.username, userData.password);
+      items = await server.getCoumunity(1);
+    }
     // if failed,use loadFailed(),if no data return,use LoadNodata()
-    items.add((items.length + 1).toString());
+    //items.add((items.length + 1).toString());
     if (mounted) setState(() {});
     _refreshController.loadComplete();
   }
 
   var _todoController = TextEditingController();
+
 
   @override
   Widget build(BuildContext context) {
@@ -63,19 +133,13 @@ class _Community2State extends State<Community2> {
                     children: <Widget>[
                       Expanded(
                         child: TextField(
-                            //controller: _todoController,
+                            controller: _todoController,
                             ),
                       ),
-                      /*RaisedButton(
-                      color: Colors.orange,
-                      child: Text('등록'),
-                      //onPressed: () => _addTodo(_todoController.text),
-                      onPressed: (){},
-                    ),*/
                       IconButton(
                         icon: Icon(Icons.border_color),
                         color: Colors.indigo,
-                        onPressed: () {},
+                        onPressed: () => _addTodo(_todoController.text),
                       )
                     ],
                   ),
@@ -110,10 +174,34 @@ class _Community2State extends State<Community2> {
                       onRefresh: _onRefresh,
                       onLoading: _onLoading,
                       child: ListView.builder(
-                        itemBuilder: (c, i) =>
-                            Card(child: Center(child: Text(items[i]))),
+                        itemBuilder: (c, i) => Card(
+                          elevation: 3,
+                          child: SingleChildScrollView(
+                            child: Padding(
+                              padding: const EdgeInsets.fromLTRB(12,6,12,6),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: <Widget>[
+                                      Text(items[i].author),
+                                      IconButton(
+                                        icon: Icon(Icons.delete_forever),
+                                        color: Colors.blueGrey,
+                                        onPressed: () => _deleteTodo(items[i]),
+                                      ),
+                                    ],
+                                  ),
+                                  Text(items[i].text,),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                        //itemBuilder: items.map((todo) => _buildItemWidget(todo)),
                         itemExtent: 100.0,
-                        itemCount: items.length,
+                        itemCount:items.length,
                       ),
                     ),
                   ),

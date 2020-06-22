@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 
 
-List<post_model> items;
+
 
 
 class Community extends StatefulWidget {
@@ -15,14 +15,16 @@ class Community extends StatefulWidget {
 }
 
 class _CommunityState extends State<Community> {
-
+  List<post_model> items;
   var _todoController = TextEditingController();
 
   @override
   void dispose() {
     _todoController.dispose();
     super.dispose();
+
   }
+
 
   Widget _buildItemWidget(post_model todo) {
 
