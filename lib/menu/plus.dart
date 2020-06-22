@@ -8,7 +8,7 @@ import "package:doublecultureapp/plus/community.dart";
 import "package:doublecultureapp/screen/login.dart";
 import "package:doublecultureapp/plus/change_PW.dart";
 import "package:doublecultureapp/plus/check.dart";
-import "package:doublecultureapp/plus/example.dart";
+//import "package:doublecultureapp/plus/example.dart";
 import 'package:doublecultureapp/data/UserData.dart';
 import 'package:doublecultureapp/data/UserData.dart';
 class Plus extends StatelessWidget{
@@ -57,7 +57,6 @@ class Plus extends StatelessWidget{
             );
           },
         ),
-/*
         ListTile(
           title: Text('커뮤니티'),
           trailing: Icon(Icons.navigate_next),
@@ -74,7 +73,7 @@ class Plus extends StatelessWidget{
               MaterialPageRoute(builder: (context) => Community()),
             );
           },
-        ),*/
+        ),
         ListTile(
           title: Text('비밀번호 변경'),
           trailing: Icon(Icons.navigate_next),
@@ -95,7 +94,7 @@ class Plus extends StatelessWidget{
             );
           },
         ),
-        ListTile(
+        /*ListTile(
           title: Text('테스트'),
           trailing: Icon(Icons.navigate_next),
           onTap:() async{
@@ -111,7 +110,7 @@ class Plus extends StatelessWidget{
               MaterialPageRoute(builder: (context) => Community2()),
             );
           },
-        ),
+        ),*/
       ],
     ),
     ],
