@@ -1,6 +1,5 @@
 import 'package:doublecultureapp/data/UserData.dart';
 import 'package:doublecultureapp/myHttp/AdapHttp.dart';
-import 'package:doublecultureapp/data/UserData.dart';
 import 'package:doublecultureapp/myHttp/model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -39,6 +38,33 @@ class _CommunityState extends State<Community> {
       ),
     );
   }
+
+/*
+  Widget _buildItemWidget(post_model todo){
+    if(todo.userId==userData.username){
+      return ListTile(
+        onTap: () {},
+        leading: Text(todo.userId),
+        title: Text(
+          todo.title,
+        ),
+        trailing: IconButton(
+          icon: Icon(Icons.delete_forever),
+          onPressed: () => _deleteTodo(todo),
+        ),
+      );
+    }else{
+      return ListTile(
+        onTap: () {},
+        leading: Text(todo.userId),
+        title: Text(
+          todo.title,
+        ),
+      );
+    }
+  }
+*/
+
 
 
   void _addTodo(String text) async {
@@ -85,6 +111,9 @@ class _CommunityState extends State<Community> {
       //});
     }
   }
+
+
+
 @override
   Widget build(BuildContext context) {
     return Scaffold(

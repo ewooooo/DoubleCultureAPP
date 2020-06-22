@@ -8,6 +8,8 @@ import "package:doublecultureapp/plus/community.dart";
 import "package:doublecultureapp/screen/login.dart";
 import "package:doublecultureapp/plus/change_PW.dart";
 import "package:doublecultureapp/plus/check.dart";
+import "package:doublecultureapp/plus/example.dart";
+import 'package:doublecultureapp/data/UserData.dart';
 import 'package:doublecultureapp/data/UserData.dart';
 class Plus extends StatelessWidget{
   @override
@@ -55,6 +57,7 @@ class Plus extends StatelessWidget{
             );
           },
         ),
+
         ListTile(
           title: Text('커뮤니티'),
           trailing: Icon(Icons.navigate_next),
@@ -89,6 +92,16 @@ class Plus extends StatelessWidget{
             Navigator.pop(
               context,
               MaterialPageRoute(builder: (context) => AuthPage()),
+            );
+          },
+        ),
+        ListTile(
+          title: Text('테스트'),
+          trailing: Icon(Icons.navigate_next),
+          onTap:(){
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => Community2()),
             );
           },
         ),
