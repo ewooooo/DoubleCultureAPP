@@ -131,6 +131,10 @@ class KSM extends StatelessWidget {
                           if (testMuseum == null) {
                             Token token = await server.getToken(
                                 userData.username, userData.password);
+                            if (token == null) {
+                              Navigator.pop(context);
+                              Navigator.pop(context);
+                            }
                             testMuseum = await server.postUserMuseum(
                                 museumName, textController.text);
                           } else {

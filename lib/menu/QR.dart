@@ -1,4 +1,6 @@
+import 'package:doublecultureapp/data/UserData.dart';
 import 'package:doublecultureapp/myHttp/AdapHttp.dart';
+import 'package:doublecultureapp/myHttp/model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
@@ -19,6 +21,7 @@ class QR_state extends State<QR> {
 
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false, // Debug 배너 제거
       home: Scaffold(
         backgroundColor: Colors.grey[300],
         body: Builder(
@@ -56,12 +59,16 @@ class QR_state extends State<QR> {
 
 
     Position position = await getGPS();
-
-    setState(() => _output = barcode);
-    printToast("QR: " + barcode);
-    printToast("lat: "+ position.latitude.toString() +" long: " + position.longitude.toString());
-
-    await server.updateStemp(barcode,position.latitude,position.longitude);
+    if(await server.updateStemp(barcode,position.latitude,position.longitude)) {
+      printToast("성공적으로 등록되었습니다.");
+    }else{
+      Token token = await server.getToken(
+          userData.username, userData.password);
+      if (token == null) {
+        Navigator.pop(context);
+      }
+      await server.updateStemp(barcode,position.latitude,position.longitude);
+    }
   }
 
   Future<Position> getGPS() async{

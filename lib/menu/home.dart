@@ -24,6 +24,7 @@ class Home extends StatelessWidget {
             ),
           ),
           Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Padding(
                 padding: const EdgeInsets.fromLTRB(6, 18, 6, 6),
@@ -44,6 +45,9 @@ class Home extends StatelessWidget {
                         if (userMuseum == null) {
                           Token token = await server.getToken(
                               userData.username, userData.password);
+                          if (token == null) {
+                            Navigator.pop(context);
+                          }
                           userMuseum = await server.getUserMuseum(museumNmae);
                         }
                         KSM page = KSM();
@@ -98,6 +102,9 @@ class Home extends StatelessWidget {
                             if (userMuseum == null) {
                               Token token = await server.getToken(
                                   userData.username, userData.password);
+                              if (token == null) {
+                                Navigator.pop(context);
+                              }
                               userMuseum =
                                   await server.getUserMuseum(museumNmae);
                             }
@@ -149,6 +156,9 @@ class Home extends StatelessWidget {
                             if (userMuseum == null) {
                               Token token = await server.getToken(
                                   userData.username, userData.password);
+                              if (token == null) {
+                                Navigator.pop(context);
+                              }
                               userMuseum =
                                   await server.getUserMuseum(museumNmae);
                             }
@@ -206,6 +216,9 @@ class Home extends StatelessWidget {
                             if (userMuseum == null) {
                               Token token = await server.getToken(
                                   userData.username, userData.password);
+                              if (token == null) {
+                                Navigator.pop(context);
+                              }
                               userMuseum =
                                   await server.getUserMuseum(museumNmae);
                             }
@@ -257,6 +270,10 @@ class Home extends StatelessWidget {
                             if (userMuseum == null) {
                               Token token = await server.getToken(
                                   userData.username, userData.password);
+                              if (token == null) {
+                                Navigator.pop(context);
+
+                              }
                               userMuseum =
                                   await server.getUserMuseum(museumNmae);
                             }

@@ -40,6 +40,10 @@ class Completion extends StatelessWidget {
                 if (user == null) {
                   Token token =
                       await server.getToken(userData.username, userData.password);
+                  if (token == null) {
+                    Navigator.pop(context);
+                    Navigator.pop(context);
+                  }
                   User user = await server.getUser();
                 } else {
                   Check_yes_or_no page = Check_yes_or_no();

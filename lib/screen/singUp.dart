@@ -40,7 +40,7 @@ class SingUp extends StatelessWidget {
                   "회원가입",
                   style: TextStyle(fontSize: 20, color: Colors.white),
                 ),
-                color: Colors.blue,
+                color: Color(0xFF1a2d74),
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(25)),
                 onPressed: () async {
@@ -72,7 +72,7 @@ class SingUp extends StatelessWidget {
                   "뒤로가기",
                   style: TextStyle(fontSize: 20, color: Colors.white),
                 ),
-                color: Colors.blue,
+                color: Color(0xFF1a2d74),
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(25)),
                 onPressed: () {

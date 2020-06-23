@@ -64,6 +64,9 @@ class Plus extends StatelessWidget{
             if (items == null) {
               Token token = await server.getToken(
                   userData.username, userData.password);
+              if (token == null) {
+                Navigator.pop(context);
+              }
               items = await server.getCoumunity(1);
             }
             Navigator.push(

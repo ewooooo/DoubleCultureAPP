@@ -45,6 +45,9 @@ class Review extends StatelessWidget {
                   if (result == null) {
                     Token token = await server.getToken(
                         userData.username, userData.password);
+                    if (token == null) {
+                      Navigator.pop(context);
+                    }
                     result = await server.postFeel(feelController.text);
                   } else {
                     if (result.feel == feelController.text) {

@@ -29,7 +29,7 @@ class _AuthPageState extends State<AuthPage> {
                 onPressed: () => Navigator.pop(context, true),
               ),
               FlatButton(
-                child: Text("cacel"),
+                child: Text("cancel"),
                 onPressed: () => Navigator.pop(context, false),
               ),
             ],
@@ -63,7 +63,7 @@ class _AuthPageState extends State<AuthPage> {
                   "로그인",
                   style: TextStyle(fontSize: 20, color: Colors.white),
                 ),
-                color: Colors.blue,
+                color: Color(0xFF1a2d74),
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(25)),
                 onPressed: () async {
@@ -106,7 +106,7 @@ class _AuthPageState extends State<AuthPage> {
                   "회원가입",
                   style: TextStyle(fontSize: 20, color: Colors.white),
                 ),
-                color: Colors.blue,
+                color: Color(0xFF1a2d74),//Colors.blue,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(25)),
                 onPressed: () {
@@ -129,16 +129,11 @@ class _AuthPageState extends State<AuthPage> {
   Widget get _logoImage => Expanded(
         child: Padding(
           padding: const EdgeInsets.only(top: 40, left: 24, right: 24),
-          child: FittedBox(
-            fit: BoxFit.contain,
-            child: CircleAvatar(
-              backgroundImage: AssetImage('assets/loading.gif'),
-              //Image.asset('assets/loading.gif')
-              //backgroundImage: NetworkImage(
-              //  "http://blogfiles.naver.net/20131017_114/g_nesa_1382021296363UTQa7_JPEG/%B0%E6%B1%E2%B4%EB%C7%D0%B1%B3.jpg/200"),
-            ),
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(50,50,50,0),
+            child: Image.asset('assets/KGU_Logo.png'),
           ),
-        ),
+          ),
       );
 
   Widget _inputForm(Size size) {
@@ -152,7 +147,7 @@ class _AuthPageState extends State<AuthPage> {
         elevation: 6,
         child: Padding(
           padding:
-              const EdgeInsets.only(left: 12.0, right: 16, top: 12, bottom: 32),
+              const EdgeInsets.only(left: 12.0, right: 16, top: 15, bottom: 32),
           child: Form(
               key: _formKey,
               child: Column(

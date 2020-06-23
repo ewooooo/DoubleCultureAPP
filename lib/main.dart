@@ -25,7 +25,7 @@ class _MyAppState extends State<MyApp> {
           accentColor: const Color(0xFF1a2d74),
           canvasColor: const Color(0xFFaabdf5),
         ),
-        //home:MyHomePage(),
+        debugShowCheckedModeBanner: false, // Debug 배너 제거
         home: AuthPage());
   }
 }
@@ -56,7 +56,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 onPressed: () => Navigator.pop(context, true),
               ),
               FlatButton(
-                child: Text("cacel"),
+                child: Text("cancel"),
                 onPressed: () => Navigator.pop(context, false),
               ),
             ],
