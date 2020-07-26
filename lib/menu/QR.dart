@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:qrscan/qrscan.dart' as scanner;
 import 'package:geolocator/geolocator.dart';
+
+import '../main.dart';
 class QR extends StatefulWidget{
   @override
   QR_state createState() => QR_state();
@@ -52,11 +54,16 @@ class QR_state extends State<QR> {
   //비동기 함수
   Future _scan() async {
     //스캔 시작 - 이때 스캔 될때까지 blocking
-    String barcode = await scanner.scan();
-    //스캔 완료하면 _output 에 문자열 저장하면서 상태 변경 요청.
-    Position position = await getGPS();
-    if(await server.updateStemp(barcode,position.latitude,position.longitude)) {
-      printToast("성공적으로 등록되었습니다.");
+    if (!waitblock) {
+      waitblock = true;
+      String barcode = await scanner.scan();
+      //스캔 완료하면 _output 에 문자열 저장하면서 상태 변경 요청.
+      Position position = await getGPS();
+      if (await server.updateStemp(
+          barcode, position.latitude, position.longitude)) {
+        printToast("성공적으로 등록되었습니다.");
+      }
+      waitblock = false;
     }
   }
 

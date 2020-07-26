@@ -3,6 +3,8 @@ import 'package:doublecultureapp/myHttp/model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../main.dart';
+
 class Completion extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -34,20 +36,24 @@ class Completion extends StatelessWidget {
                   child: Text('관리자에게 요청', style: TextStyle(color: Colors.red)),
                   color: Colors.white,
                   onPressed: () async {
-                    User user = await server.getUser();
-                    Map<String, dynamic> stateData = await server.stampstatus();
-                    if (user != null && stateData != null) {
-                      Check_yes_or_no page = Check_yes_or_no();
-                      page.stateData = stateData;
-                      page.name = user.firstName;
-                      page.studentID = user.username;
+                    if (!waitblock) {
+                      waitblock = true;
+                      User user = await server.getUser();
+                      Map<String, dynamic> stateData =
+                          await server.stampstatus();
+                      if (user != null && stateData != null) {
+                        Check_yes_or_no page = Check_yes_or_no();
+                        page.stateData = stateData;
+                        page.name = user.firstName;
+                        page.studentID = user.username;
 
-
-                      Navigator.push(
-                        //관리자 서버와 이수여부 확인 연동하기!!!
-                        context,
-                        MaterialPageRoute(builder: (context) => page),
-                      );
+                        Navigator.push(
+                          //관리자 서버와 이수여부 확인 연동하기!!!
+                          context,
+                          MaterialPageRoute(builder: (context) => page),
+                        );
+                      }
+                      waitblock = false;
                     }
                   },
                 ),
@@ -97,15 +103,17 @@ class Check_yes_or_no extends StatelessWidget {
                   Column(children: <Widget>[
                     Text('\n최종이수여부',
                         style: TextStyle(color: Colors.black, fontSize: 26.0)),
+
                     Text('\n  이름 : '+name+'      학번 : '+studentID+'\n'),
+
 
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
+
                             Text('    경기대 소성박물관     ', style: TextStyle(fontSize: 17),),
                             Text('\n'),
                             Text('    수원 광교박물관     ', style: TextStyle(fontSize: 17),),
@@ -115,24 +123,30 @@ class Check_yes_or_no extends StatelessWidget {
                             Text('    수원 화성박물관     ', style: TextStyle(fontSize: 17),),
                             Text('\n'),
                             Text('    수원 화성행궁     ', style: TextStyle(fontSize: 17),),
-                            Text('\n'),
 
+                            Text('\n'),
                           ],
                         ),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: <Widget>[
-                            Text('스탬프 : ' + isooCheck(stateData['소성박물관'].stamp)),
+                            Text(
+                                '스탬프 : ' + isooCheck(stateData['소성박물관'].stamp)),
                             Text('퀴즈 : ' + isooCheck(stateData['소성박물관'].quiz)),
                             Text(' ', style: TextStyle(fontSize: 13)),
-                            Text('스탬프 : ' + isooCheck(stateData['수원광교박물관'].stamp)),
-                            Text('퀴즈 : ' + isooCheck(stateData['수원광교박물관'].quiz)),
+                            Text('스탬프 : ' +
+                                isooCheck(stateData['수원광교박물관'].stamp)),
+                            Text(
+                                '퀴즈 : ' + isooCheck(stateData['수원광교박물관'].quiz)),
                             Text(' ', style: TextStyle(fontSize: 13)),
-                            Text('스탬프 : ' + isooCheck(stateData['수원박물관'].stamp)),
+                            Text(
+                                '스탬프 : ' + isooCheck(stateData['수원박물관'].stamp)),
                             Text('퀴즈 : ' + isooCheck(stateData['수원박물관'].quiz)),
                             Text(' ', style: TextStyle(fontSize: 13)),
-                            Text('스탬프 : ' + isooCheck(stateData['수원화성박물관'].stamp)),
-                            Text('퀴즈 : ' + isooCheck(stateData['수원화성박물관'].quiz)),
+                            Text('스탬프 : ' +
+                                isooCheck(stateData['수원화성박물관'].stamp)),
+                            Text(
+                                '퀴즈 : ' + isooCheck(stateData['수원화성박물관'].quiz)),
                             Text(' ', style: TextStyle(fontSize: 13)),
                             Text('스탬프 : ' + isooCheck(stateData['수원화성'].stamp)),
                             Text('퀴즈 : ' + isooCheck(stateData['수원화성'].quiz)),
@@ -150,10 +164,12 @@ class Check_yes_or_no extends StatelessWidget {
                       ],
                     ),
                     Text(''),
-                    Text('소감문 : '+isooCheck(stateData['feeling']),
+                    Text('소감문 : ' + isooCheck(stateData['feeling']),
                         style: TextStyle(color: Colors.black, fontSize: 20.0)),
+
                     Text('\n최종이수 : '+isooCheck(stateData['CompleteState'], ),
                         style: TextStyle(color: const Color(0xFF1a2d74), fontSize: 20.0)),
+
                     //body
                   ]),
                 ],

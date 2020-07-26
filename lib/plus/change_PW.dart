@@ -2,6 +2,8 @@ import 'package:doublecultureapp/myHttp/AdapHttp.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../main.dart';
+
 final TextEditingController feelController = TextEditingController();
 
 class ChangePW extends StatelessWidget {
@@ -68,20 +70,26 @@ class ChangePW extends StatelessWidget {
                     child: Text('확인'),
                     color: Colors.white,
                     onPressed: () async {
-                      if (nowController.text != server.password) {
-                        printToast("현재 비밀번호가 틀립니다.");
-                      } else {
-                        if (newController.text == neewController.text) {
-                          printToast('변경되었습니다.');
-                          //비밀번호변경코드추가
+                      if (!waitblock) {
+                        waitblock = true;
+                        if (nowController.text != server.password) {
+                          printToast("현재 비밀번호가 틀립니다.");
                         } else {
-                          printToast("새 비밀번호가 일치하지 않습니다");
+                          if (newController.text == neewController.text) {
+                            printToast('변경되었습니다.');
+                            //비밀번호변경코드추가
+                          } else {
+                            printToast("새 비밀번호가 일치하지 않습니다");
+                          }
                         }
-                      };
-                      if (await server.postPassword(nowController.text,
-                          newController.text, neewController.text)) {
-                        Navigator.pop(context);
-                        Navigator.pop(context);
+                        ;
+                        if (await server.postPassword(nowController.text,
+                            newController.text, neewController.text)) {
+                          Navigator.pop(context);
+                          Navigator.pop(context);
+                        }
+
+                        waitblock = false;
                       }
                     },
                   ),

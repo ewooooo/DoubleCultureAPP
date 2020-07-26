@@ -1,22 +1,22 @@
+import 'package:doublecultureapp/main.dart';
 import 'package:doublecultureapp/myHttp/AdapHttp.dart';
 import 'package:doublecultureapp/myHttp/model.dart';
 import 'package:doublecultureapp/museum/Museum_BusWeb.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-
 class KSM extends StatelessWidget {
-
   String museumName;
   String quiz1, quiz2, quiz3;
   bool stempState; //스템프 찍었는지 여부
   TextEditingController textController = new TextEditingController();
   String stp;
-  String stampData="";
-  stamp(stempSt){
-    if(stempSt==true){
-      stp='assets/STAMP_KSM.png';
-    }else{
+  String stampData = "";
+
+  stamp(stempSt) {
+    if (stempSt == true) {
+      stp = 'assets/STAMP_KSM.png';
+    } else {
       stp = 'assets/STAMP_EMPTY.png';
     }
     return stp;
@@ -31,11 +31,12 @@ class KSM extends StatelessWidget {
         actions: <Widget>[
           IconButton(
             icon: const Icon(Icons.directions_bus, color: Colors.green),
-            onPressed: (){
+            onPressed: () {
               Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => KSM_bus()),
-            );},
+                context,
+                MaterialPageRoute(builder: (context) => KSM_bus()),
+              );
+            },
           )
         ],
       ),
@@ -59,16 +60,12 @@ class KSM extends StatelessWidget {
                           fontWeight: FontWeight.bold,
                           color: Colors.indigo,
                         )),
-
                     Row(
                       children: <Widget>[
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Image.asset('assets/SS_KSM.jpg',
-                              width: MediaQuery
-                                  .of(context)
-                                  .size
-                                  .width / 2.5),
+                              width: MediaQuery.of(context).size.width / 2.5),
                         ),
                         Padding(
                           padding: const EdgeInsets.all(8.0),
@@ -113,13 +110,17 @@ class KSM extends StatelessWidget {
                         Column(
                           children: <Widget>[
                             Container(
-                                height: MediaQuery.of(context).size.width / 3.5
-                            ),
-                            Center(child: Text(stampData,style: TextStyle(
+                                height:
+                                    MediaQuery.of(context).size.width / 3.5),
+                            Center(
+                                child: Text(
+                              stampData,
+                              style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 18,
                                 color: Colors.black,
-                            ),)),
+                              ),
+                            )),
                           ],
                         ),
                       ],
@@ -152,21 +153,25 @@ class KSM extends StatelessWidget {
                       child: Text('제출'),
                       color: Colors.white,
                       onPressed: () async {
-                        if (textController.text.length < 16){
-                        printToast("글자수를 15 이상 넘겨주세요.");
-                        }else {
-                          UserMuseum testMuseum = await server.postUserMuseum(
-                              museumName, textController.text);
-                          if (testMuseum != null) {
-                            if (testMuseum.stampStatus == this.stempState ||
-                                testMuseum.quiz_answer ==
-                                    this.textController.text) {
-                              printToast("성공적으로 등록되었습니다.");
-                            } else {
-                              printToast(
-                                  "다시한번 시도해주세요. \n 안내메시지가 계속 나올시 연락부탁드립니다.");
+                        if (!waitblock) {
+                          waitblock = true;
+                          if (textController.text.length < 16) {
+                            printToast("글자수를 15 이상 넘겨주세요.");
+                          } else {
+                            UserMuseum testMuseum = await server.postUserMuseum(
+                                museumName, textController.text);
+                            if (testMuseum != null) {
+                              if (testMuseum.stampStatus == this.stempState ||
+                                  testMuseum.quiz_answer ==
+                                      this.textController.text) {
+                                printToast("성공적으로 등록되었습니다.");
+                              } else {
+                                printToast(
+                                    "다시한번 시도해주세요. \n 안내메시지가 계속 나올시 연락부탁드립니다.");
+                              }
                             }
                           }
+                          waitblock = false;
                         }
                       },
                     ),
