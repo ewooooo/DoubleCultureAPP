@@ -1,4 +1,3 @@
-import 'package:doublecultureapp/data/UserData.dart';
 import 'package:doublecultureapp/myHttp/AdapHttp.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -69,7 +68,7 @@ class ChangePW extends StatelessWidget {
                     child: Text('확인'),
                     color: Colors.white,
                     onPressed: () async {
-                      if (nowController.text != userData.password) {
+                      if (nowController.text != server.password) {
                         printToast("현재 비밀번호가 틀립니다.");
                       } else {
                         if (newController.text == neewController.text) {

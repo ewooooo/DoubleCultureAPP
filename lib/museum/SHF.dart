@@ -1,4 +1,3 @@
-import 'package:doublecultureapp/data/UserData.dart';
 import 'package:doublecultureapp/myHttp/AdapHttp.dart';
 import 'package:doublecultureapp/myHttp/model.dart';
 import 'package:doublecultureapp/museum/Museum_BusWeb.dart';
@@ -11,6 +10,7 @@ class SHF extends StatelessWidget {
   bool stempState; //스템프 찍었는지 여부
   TextEditingController textController = new TextEditingController();
   String stp;
+  String stampData = "";
 
   stamp(stempSt) {
     if (stempSt == true) {
@@ -118,6 +118,7 @@ class SHF extends StatelessWidget {
                     Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Image.asset(stamp(stempState))),
+                    Text(stampData),
                   ],
                 ),
               ),
@@ -151,16 +152,7 @@ class SHF extends StatelessWidget {
                         } else {
                           UserMuseum testMuseum = await server.postUserMuseum(
                               museumName, textController.text);
-                          if (testMuseum == null) {
-                            Token token = await server.getToken(
-                                userData.username, userData.password);
-                            if (token == null) {
-                              Navigator.pop(context);
-                              Navigator.pop(context);
-                            }
-                            testMuseum = await server.postUserMuseum(
-                                museumName, textController.text);
-                          } else {
+                          if (testMuseum != null) {
                             if (testMuseum.stampStatus == this.stempState ||
                                 testMuseum.quiz_answer ==
                                     this.textController.text) {

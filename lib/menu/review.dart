@@ -1,4 +1,3 @@
-import 'package:doublecultureapp/data/UserData.dart';
 import 'package:doublecultureapp/myHttp/AdapHttp.dart';
 import 'package:doublecultureapp/myHttp/model.dart';
 import 'package:flutter/cupertino.dart';
@@ -49,14 +48,7 @@ class Review extends StatelessWidget {
                   printToast("글자수를 30 이상 넘겨주세요.");
                 } else {
                   UserFeel result = await server.postFeel(feelController.text);
-                  if (result == null) {
-                    Token token = await server.getToken(
-                        userData.username, userData.password);
-                    if (token == null) {
-                      Navigator.pop(context);
-                    }
-                    result = await server.postFeel(feelController.text);
-                  } else {
+                  if (result != null) {
                     if (result.feel == feelController.text) {
                       printToast("성공적으로 등록되었습니다.");
                     } else {
