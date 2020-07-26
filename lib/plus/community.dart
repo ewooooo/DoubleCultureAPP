@@ -13,12 +13,15 @@ class Community extends StatefulWidget {
 }
 
 class _CommunityState extends State<Community> {
-
+  bool _isButtonDisabled = true;
   var _todoController = TextEditingController();
 
   RefreshController _refreshController =
   RefreshController(initialRefresh: false);
 
+  String dateManager(String dateText){
+    return dateText.substring(2,4)+"/"+dateText.substring(5,7)+"/"+dateText.substring(8,10)+"   "+dateText.substring(11,16);
+  }
 
   void dispose() {
     _todoController.dispose();
@@ -155,11 +158,12 @@ class _CommunityState extends State<Community> {
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: <Widget>[
-                                      Text(items[i].author),
+                                      Text("ID: "+items[i].author),
+                                      Text(dateManager(items[i].created)),
                                       IconButton(
-                                        icon: Icon(Icons.delete_forever),
+                                        icon: Icon(items[i].author == server.username  ? Icons.delete_forever : null),
                                         color: Colors.blueGrey,
-                                        onPressed: () => _deleteTodo(items[i]),
+                                        onPressed: () => items[i].author == server.username ? _deleteTodo(items[i]): null,
                                       ),
                                     ],
                                   ),

@@ -63,20 +63,17 @@ class User{
 class UserMuseum{
   final bool stampStatus;
   final String quiz_answer;
+  final String create_Stamp_date;
 
-  UserMuseum({this.stampStatus, this.quiz_answer});
+  UserMuseum({this.stampStatus, this.quiz_answer,this.create_Stamp_date});
 
   factory UserMuseum.fromJson(Map<String, dynamic> json) {
     return UserMuseum(
       stampStatus: json['stampStatus'],
       quiz_answer: json['quiz_answer'],
+      create_Stamp_date: json['create_Stamp_date'],
     );
   }
-  Map<String,dynamic> toJson() =>
-      {
-        "stampStatus": stampStatus,
-        "quiz_answer": quiz_answer,
-      };
 }
 
 
@@ -101,14 +98,32 @@ class post_model {
   final int id;
   final String author;
   final String text;
+  final String created;
 
-  post_model({this.id, this.author,this.text});
+  post_model({this.id, this.author,this.text,this.created});
 
   factory post_model.fromJson(Map<String, dynamic> json) {
     return post_model(
       id: json['id'],
       author: json['author'],
       text: json['text'],
+      created:json['created'],
+    );
+  }
+}
+
+class museumstatus_model {
+  final String museum;
+  final bool quiz;
+  final bool stamp;
+
+  museumstatus_model({this.museum, this.quiz, this.stamp});
+
+  factory museumstatus_model.fromJson(Map<String, dynamic> json) {
+    return museumstatus_model(
+      museum: json['museum'],
+      quiz: json['quiz'],
+      stamp: json['stamp'],
     );
   }
 }

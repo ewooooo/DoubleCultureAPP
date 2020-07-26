@@ -9,6 +9,7 @@ class SGM extends StatelessWidget {
   bool stempState; //스템프 찍었는지 여부
   TextEditingController textController = new TextEditingController();
   String stp;
+  String stampData = "";
 
   stamp(stempSt) {
     if (stempSt == true) {
@@ -106,6 +107,7 @@ class SGM extends StatelessWidget {
                     Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Image.asset(stamp(stempState))),
+                    Text(stampData),
                   ],
                 ),
               ),

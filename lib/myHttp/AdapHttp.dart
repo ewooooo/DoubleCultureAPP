@@ -481,7 +481,42 @@ class Server {
     }
   }
 
+  Future<Map<String, dynamic>> stampstatus() async {
+    final http.Response response = await http.get(
+      _API_PREFIX + "/app/final/",
+      headers: <String, String>{
+        'Authorization': "jwt " + token,
+        'Content-Type': 'application/json'
+      },
+    );
+    if (response.statusCode == 200) {
+      String body = utf8.decode(response.bodyBytes);
+      dynamic j = json.decode(body);
 
+      Map<String, dynamic> statusMap = Map();
+      for(var i in j){
+        Map<String, dynamic> jsonvalue = i;
+        if(jsonvalue.containsKey('museum')){
+          museumstatus_model pm = museumstatus_model.fromJson(jsonvalue);
+          statusMap[pm.museum] = pm;
+
+        }else if(jsonvalue.containsKey('feeling')){
+          statusMap.addAll(i);
+        }else{
+          throw Exception('Failed to connection');
+        }
+      }
+      return statusMap;
+    } else if (response.statusCode == 401) {
+      if(await this.regetToken()) {
+        return this.stampstatus();
+      }
+    } else {
+      printToast("서버와 연결이 원활하지 않습니다. \n 관리자에게 문의해주세요.");
+      // If the server did not return a 200 OK response, then throw an exception.
+      throw Exception('Failed to connection');
+    }
+  }
 }
 
 Server server = Server();

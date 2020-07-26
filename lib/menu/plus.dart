@@ -1,14 +1,41 @@
 import 'package:doublecultureapp/myHttp/AdapHttp.dart';
-import 'package:doublecultureapp/myHttp/model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import "package:doublecultureapp/plus/notice.dart";
 import "package:doublecultureapp/plus/bus.dart";
 import "package:doublecultureapp/plus/community.dart";
-import "package:doublecultureapp/screen/login.dart";
 import "package:doublecultureapp/plus/change_PW.dart";
 import "package:doublecultureapp/plus/check.dart";
-class Plus extends StatelessWidget{
+class Plus extends StatefulWidget{
+  @override
+  _PlusState createState() => _PlusState();
+}
+
+class _PlusState extends State<Plus> {
+
+  Future<bool> _logoutPressed() {
+    return showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text("로그아웃 하시겠습니까?"),
+        actions: <Widget>[
+          FlatButton(
+              child: Text("ok"),
+              onPressed: () {
+                Navigator.pop(context, true);
+                Navigator.pop(context, true);
+              }
+          ),
+          FlatButton(
+            child: Text("cancel"),
+            onPressed: () => Navigator.pop(context, false),
+          ),
+        ],
+      ),
+    ) ??
+        false;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -58,8 +85,6 @@ class Plus extends StatelessWidget{
           title: Text('커뮤니티'),
           trailing: Icon(Icons.navigate_next),
           onTap:() async{
-
-            items = await server.getCoumunity(1);
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => Community()),
@@ -80,29 +105,10 @@ class Plus extends StatelessWidget{
           title: Text('로그아웃'),
           trailing: Icon(Icons.navigate_next),
           onTap:(){
-            Navigator.pop(
-              context,
-              MaterialPageRoute(builder: (context) => AuthPage()),
-            );
+            _logoutPressed();
+
           },
         ),
-        /*ListTile(
-          title: Text('테스트'),
-          trailing: Icon(Icons.navigate_next),
-          onTap:() async{
-
-            items = await server.getCoumunity(1);
-            if (items == null) {
-              Token token = await server.getToken(
-                  userData.username, userData.password);
-              items = await server.getCoumunity(1);
-            }
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => Community2()),
-            );
-          },
-        ),*/
       ],
     ),
     ],

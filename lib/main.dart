@@ -6,6 +6,7 @@ import "package:doublecultureapp/menu/home.dart";
 import "package:doublecultureapp/menu/QR.dart";
 import "package:doublecultureapp/menu/review.dart";
 import "package:doublecultureapp/menu/plus.dart";
+import 'package:flutter/services.dart';
 
 void main() => runApp(MyApp());
 
@@ -53,7 +54,10 @@ class _MyHomePageState extends State<MyHomePage> {
             actions: <Widget>[
               FlatButton(
                 child: Text("ok"),
-                onPressed: () => Navigator.pop(context, true),
+                onPressed: () {
+                  SystemNavigator.pop();
+                  //=> Navigator.pop(context, true),
+                }
               ),
               FlatButton(
                 child: Text("cancel"),
