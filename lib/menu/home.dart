@@ -42,8 +42,7 @@ class Home extends StatelessWidget {
       page.textController.text = userMuseum.quiz_answer;
       page.stempState = userMuseum.stampStatus;
       if (userMuseum.create_Stamp_date != 'False'){
-        page.stampData = "완료일 : "
-            +userMuseum.create_Stamp_date.substring(4,8)+"년 "
+        page.stampData = userMuseum.create_Stamp_date.substring(4,8)+"년 "
             +userMuseum.create_Stamp_date.substring(9,11)+"월 "
             +userMuseum.create_Stamp_date.substring(12,14)+"일";
       }

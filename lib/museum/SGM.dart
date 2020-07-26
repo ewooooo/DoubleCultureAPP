@@ -116,10 +116,25 @@ class SGM extends StatelessWidget {
                         ],
                       ),
                     ),
-                    Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Image.asset(stamp(stempState))),
-                    Text(stampData),
+                    Stack(
+                      children: <Widget>[
+                        Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Image.asset(stamp(stempState))),
+                        Column(
+                          children: <Widget>[
+                            Container(
+                                height: MediaQuery.of(context).size.width / 3.5
+                            ),
+                            Center(child: Text(stampData,style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18,
+                                color: Colors.teal
+                            ),)),
+                          ],
+                        ),
+                      ],
+                    ),
                   ],
                 ),
               ),
