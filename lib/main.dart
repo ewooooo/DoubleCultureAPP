@@ -98,7 +98,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   title: Text('QR코드'),
                   backgroundColor: Color(0xFF1a2d74)),
               BottomNavigationBarItem(
-                  icon: Icon(Icons.pages),
+                  icon: Icon(Icons.assignment),
                   title: Text('소감작성'),
                   backgroundColor: Color(0xFF1a2d74)),
               BottomNavigationBarItem(

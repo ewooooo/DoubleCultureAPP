@@ -106,6 +106,9 @@ class _CommunityState extends State<Community> {
                     children: <Widget>[
                       Expanded(
                         child: TextField(
+                          style: TextStyle(),
+                          keyboardType: TextInputType.multiline,
+                          maxLines: null,
                           controller: _todoController,
                         ),
                       ),

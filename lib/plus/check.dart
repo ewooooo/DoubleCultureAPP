@@ -27,7 +27,7 @@ class Completion extends StatelessWidget {
                     style: TextStyle(color: Colors.red, fontSize: 20.0)),
                 //body
                 Text(
-                  '   모든 퀴즈와 소감문을\n    작성 후 눌러주세요.',
+                  '   본인의 이수여부를 \n       확인하세요!',
                 ),
                 new Icon(Icons.arrow_downward, color: Colors.green, size: 30.0),
                 RaisedButton(
@@ -51,7 +51,7 @@ class Completion extends StatelessWidget {
                     }
                   },
                 ),
-                Text('\n  문제발생시 연락주세요.\n        031-249-1483\n    (경기대 소성박물관)'),
+                Text('\n  문제발생시 연락주세요.\n\n        031-249-1483\n    (경기대 소성박물관)'),
               ]),
         ),
       ),
@@ -97,30 +97,30 @@ class Check_yes_or_no extends StatelessWidget {
                   Column(children: <Widget>[
                     Text('\n최종이수여부',
                         style: TextStyle(color: Colors.black, fontSize: 26.0)),
-                    Text('이름 : '+name+'      학번 : '+studentID+'\n'),
+                    Text('\n  이름 : '+name+'      학번 : '+studentID+'\n'),
 
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
 
                         Column(
-                          crossAxisAlignment: CrossAxisAlignment.end,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            Text('소성박물관   ', style: TextStyle(fontSize: 17),),
+                            Text('    경기대 소성박물관     ', style: TextStyle(fontSize: 17),),
                             Text('\n'),
-                            Text('수원광교박물관   ', style: TextStyle(fontSize: 17),),
+                            Text('    수원 광교박물관     ', style: TextStyle(fontSize: 17),),
                             Text('\n'),
-                            Text('수원박물관   ', style: TextStyle(fontSize: 17),),
+                            Text('    수원 박물관     ', style: TextStyle(fontSize: 17),),
                             Text('\n'),
-                            Text('수원화성박물관   ', style: TextStyle(fontSize: 17),),
+                            Text('    수원 화성박물관     ', style: TextStyle(fontSize: 17),),
                             Text('\n'),
-                            Text('수원화성행궁   ', style: TextStyle(fontSize: 17),),
+                            Text('    수원 화성행궁     ', style: TextStyle(fontSize: 17),),
                             Text('\n'),
 
                           ],
                         ),
                         Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.end,
                           children: <Widget>[
                             Text('스탬프 : ' + isooCheck(stateData['소성박물관'].stamp)),
                             Text('퀴즈 : ' + isooCheck(stateData['소성박물관'].quiz)),
@@ -141,13 +141,19 @@ class Check_yes_or_no extends StatelessWidget {
                             //Text(' ')
                           ],
                         ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: <Widget>[
+                            Text('   '),
+                          ],
+                        ),
                       ],
                     ),
                     Text(''),
                     Text('소감문 : '+isooCheck(stateData['feeling']),
                         style: TextStyle(color: Colors.black, fontSize: 20.0)),
-                    Text('\n최종이수 : '+isooCheck(stateData['CompleteState']),
-                        style: TextStyle(color: Colors.black, fontSize: 20.0)),
+                    Text('\n최종이수 : '+isooCheck(stateData['CompleteState'], ),
+                        style: TextStyle(color: const Color(0xFF1a2d74), fontSize: 20.0)),
                     //body
                   ]),
                 ],
