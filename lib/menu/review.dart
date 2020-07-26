@@ -18,6 +18,10 @@ class Review extends StatelessWidget {
           ),
         ),
       ),
+      PageView(
+      children: <Widget>[
+      SingleChildScrollView(
+      child:
       Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(
@@ -26,6 +30,9 @@ class Review extends StatelessWidget {
               '소감 작성\n',
             ),
             TextField(
+              style: TextStyle(),
+              keyboardType: TextInputType.multiline,
+              maxLines: null,
               controller: feelController,
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
@@ -62,6 +69,8 @@ class Review extends StatelessWidget {
           ],
         ),
       ),
+      )],
+    ),
     ]);
   }
 }

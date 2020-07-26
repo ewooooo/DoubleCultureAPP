@@ -1,6 +1,7 @@
 import 'package:doublecultureapp/data/UserData.dart';
 import 'package:doublecultureapp/myHttp/AdapHttp.dart';
 import 'package:doublecultureapp/myHttp/model.dart';
+import 'package:doublecultureapp/museum/Museum_BusWeb.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -26,6 +27,17 @@ class SHF extends StatelessWidget {
       appBar: AppBar(
         title: Text('수원화성'),
         centerTitle: true,
+        actions: <Widget>[
+          IconButton(
+            icon: const Icon(Icons.directions_bus, color: Colors.green),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => SHF_bus()),
+              );
+            },
+          )
+        ],
       ),
       body: Container(
         decoration: BoxDecoration(
@@ -119,6 +131,9 @@ class SHF extends StatelessWidget {
                     Text(quiz2),
                     Text(quiz3),
                     TextField(
+                      style: TextStyle(),
+                      keyboardType: TextInputType.multiline,
+                      maxLines: null,
                       controller: textController,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),

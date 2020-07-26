@@ -3,7 +3,7 @@ import 'package:doublecultureapp/myHttp/model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import "package:doublecultureapp/plus/notice.dart";
-import "package:doublecultureapp/plus/bus.dart";
+import 'package:doublecultureapp/museum/Museum_BusWeb.dart';
 import "package:doublecultureapp/plus/community.dart";
 import "package:doublecultureapp/screen/login.dart";
 import "package:doublecultureapp/plus/change_PW.dart";
@@ -44,16 +44,6 @@ class Plus extends StatelessWidget{
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => Notice()),
-            );
-          },
-        ),
-        ListTile(
-          title: Text('교통 정보'),
-          trailing: Icon(Icons.navigate_next),
-          onTap:(){
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => Suwonmuseumbelt()),
             );
           },
         ),
