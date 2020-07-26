@@ -4,6 +4,8 @@ import 'package:doublecultureapp/museum/Museum_BusWeb.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../main.dart';
+
 class SGM extends StatelessWidget {
   String museumName;
   String quiz1, quiz2, quiz3;
@@ -30,7 +32,7 @@ class SGM extends StatelessWidget {
         actions: <Widget>[
           IconButton(
             icon: const Icon(Icons.directions_bus, color: Colors.green),
-            onPressed: (){
+            onPressed: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => SGM_bus()),
@@ -124,13 +126,16 @@ class SGM extends StatelessWidget {
                         Column(
                           children: <Widget>[
                             Container(
-                                height: MediaQuery.of(context).size.width / 3.5
-                            ),
-                            Center(child: Text(stampData,style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 18,
-                                color: Colors.teal
-                            ),)),
+                                height:
+                                    MediaQuery.of(context).size.width / 3.5),
+                            Center(
+                                child: Text(
+                              stampData,
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18,
+                                  color: Colors.teal),
+                            )),
                           ],
                         ),
                       ],
@@ -163,21 +168,25 @@ class SGM extends StatelessWidget {
                       child: Text('제출'),
                       color: Colors.white,
                       onPressed: () async {
-                        if (textController.text.length < 16) {
-                          printToast("글자수를 15 이상 넘겨주세요.");
-                        } else {
-                          UserMuseum testMuseum = await server.postUserMuseum(
-                              museumName, textController.text);
-                          if (testMuseum != null) {
-                            if (testMuseum.stampStatus == this.stempState ||
-                                testMuseum.quiz_answer ==
-                                    this.textController.text) {
-                              printToast("성공적으로 등록되었습니다.");
-                            } else {
-                              printToast(
-                                  "다시한번 시도해주세요. \n 안내메시지가 계속 나올시 연락부탁드립니다.");
+                        if (!waitblock) {
+                          waitblock = true;
+                          if (textController.text.length < 16) {
+                            printToast("글자수를 15 이상 넘겨주세요.");
+                          } else {
+                            UserMuseum testMuseum = await server.postUserMuseum(
+                                museumName, textController.text);
+                            if (testMuseum != null) {
+                              if (testMuseum.stampStatus == this.stempState ||
+                                  testMuseum.quiz_answer ==
+                                      this.textController.text) {
+                                printToast("성공적으로 등록되었습니다.");
+                              } else {
+                                printToast(
+                                    "다시한번 시도해주세요. \n 안내메시지가 계속 나올시 연락부탁드립니다.");
+                              }
                             }
                           }
+                          waitblock = false;
                         }
                       },
                     ),

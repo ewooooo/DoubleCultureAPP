@@ -10,6 +10,7 @@ import 'package:flutter/services.dart';
 
 void main() => runApp(MyApp());
 
+bool waitblock = false;
 class MyApp extends StatefulWidget {
   @override
   _MyAppState createState() => _MyAppState();
@@ -84,6 +85,9 @@ class _MyHomePageState extends State<MyHomePage> {
               setState(
                 () {
                   _index = index;
+                  if(waitblock){
+                    waitblock = false;
+                  }
                 },
               );
             },
