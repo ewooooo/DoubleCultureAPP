@@ -75,6 +75,7 @@ class _PlusState extends State<Plus> {
           title: Text('커뮤니티'),
           trailing: Icon(Icons.navigate_next),
           onTap:() async{
+            items = await server.getCoumunity(1);
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => Community()),

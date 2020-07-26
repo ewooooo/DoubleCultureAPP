@@ -13,7 +13,7 @@ class Community extends StatefulWidget {
 }
 
 class _CommunityState extends State<Community> {
-  bool _isButtonDisabled = true;
+
   var _todoController = TextEditingController();
 
   RefreshController _refreshController =
@@ -175,7 +175,7 @@ class _CommunityState extends State<Community> {
                         ),
                         //itemBuilder: items.map((todo) => _buildItemWidget(todo)),
                         itemExtent: 100.0,
-                        itemCount:items.length,
+                        itemCount: items.length,
                       ),
                     ),
                   ),
