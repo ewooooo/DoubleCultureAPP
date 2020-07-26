@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:doublecultureapp/myHttp/model.dart';
@@ -23,6 +24,8 @@ const _API_PREFIX = "http://ec2-18-216-189-42.us-east-2.compute.amazonaws.com/";
 
 class Server {
   String token = "";
+  String username;
+  String password;
 
   Future<bool> ckeckID(String id) async {
     final http.Response response = await http.put(
@@ -83,8 +86,7 @@ class Server {
     }
   }
 
-
-  Future<Token> getToken(String id, String pw) async {
+  Future<bool> getToken(String id, String pw) async {
     final http.Response response = await http.post(
       _API_PREFIX + "api/token/",
       headers: <String, String>{
@@ -103,9 +105,12 @@ class Server {
       dynamic j = json.decode(body);
       Token t = Token.fromJson(j);
       this.token = t.token;
-      return t;
+      this.username = id;
+      this.password = pw;
+      return true;
     } else if(response.statusCode == 400){
-      return null;
+      printToast("로그인 정보가 옳바르지 않습니다.");
+      return false;
     } else {
       printToast("서버와 연결이 원활하지 않습니다. \n 관리자에게 문의해주세요.");
       // If the server did not return a 200 OK response, then throw an exception.
@@ -113,6 +118,34 @@ class Server {
     }
   }
 
+  Future<bool> regetToken() async {
+    final http.Response response = await http.post(
+      _API_PREFIX + "api/token/",
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(
+          {
+            'username': this.username,
+            'password': this.password
+          }
+      ),
+    );
+    if (response.statusCode == 200) {
+      // If the server did return a 200 OK response, then parse the JSON.
+      String body = utf8.decode(response.bodyBytes);
+      dynamic j = json.decode(body);
+      Token t = Token.fromJson(j);
+      this.token = t.token;
+      return true;
+    } else if(response.statusCode == 400){
+      return false;
+    } else {
+      printToast("서버와 연결이 원활하지 않습니다. \n 관리자에게 문의해주세요.");
+      // If the server did not return a 200 OK response, then throw an exception.
+      throw Exception('Failed to connection');
+    }
+  }
 
   Future<bool> checkToken() async {
     final http.Response response = await http.post(
@@ -129,6 +162,8 @@ class Server {
     if (response.statusCode == 200) {
       return true;
     } else if (response.statusCode == 400) {
+      printToast("Server와 로그인 정보가 동일하지 않습니다.");
+      SystemNavigator.pop();
       return false;
     } else {
       printToast("서버와 연결이 원활하지 않습니다. \n 관리자에게 문의해주세요.");
@@ -148,7 +183,9 @@ class Server {
       User u = User.fromJson(j);
       return u;
     } else if(response.statusCode == 401){
-      return null;
+      if(await this.regetToken()) {
+        return this.getUser();
+      }
     } else {
       // If the server did not return a 200 OK response, then throw an exception.
       printToast("서버와 연결이 원활하지 않습니다. \n 관리자에게 문의해주세요.");
@@ -183,6 +220,10 @@ class Server {
     } else if(response.statusCode == 400){
       printToast("현재 비밀번호가 다릅니다.");
       return false;
+    } else if(response.statusCode == 401){
+      if(await this.regetToken()) {
+        return this.postPassword(password, newPassword,newPasswoedRe);
+      }
     } else {
       // If the server did not return a 200 OK response, then throw an exception.
       printToast("서버와 연결이 원활하지 않습니다. \n 관리자에게 문의해주세요.");
@@ -202,7 +243,10 @@ class Server {
       UserMuseum um = UserMuseum.fromJson(j);
       return um;
     } else if(response.statusCode ==401){
-      return null;
+      if(await this.regetToken()) {
+        return this.getUserMuseum(museumId);
+      }
+
     } else {
       printToast("서버와 연결이 원활하지 않습니다. \n 관리자에게 문의해주세요.");
       // If the server did not return a 200 OK response, then throw an exception.
@@ -230,7 +274,9 @@ class Server {
       UserMuseum um = UserMuseum.fromJson(j);
       return um;
     } else if(response.statusCode == 401){
-      return null;
+      if(await this.regetToken()) {
+        return this.postUserMuseum(museumId,quizAnswer);
+      }
     } else {
       printToast("서버와 연결이 원활하지 않습니다. \n 관리자에게 문의해주세요.");
       // If the server did not return a 200 OK response, then throw an exception.
@@ -262,6 +308,10 @@ class Server {
     } else if (response.statusCode == 202) {
       printToast("올바른 QR코드를 찍어주세요.");
       return false;
+    } else if(response.statusCode == 401){
+      if(await this.regetToken()) {
+        return this.updateStemp(QR,latitude,longitude);
+      }
     } else {
       printToast("서버와 연결이 원활하지 않습니다. \n 관리자에게 문의해주세요.");
       // If the server did not return a 200 OK response, then throw an exception.
@@ -287,6 +337,10 @@ class Server {
       dynamic j = json.decode(body);
       UserFeel uf = UserFeel.fromJson(j);
       return uf;
+    } else if(response.statusCode == 401){
+      if(await this.regetToken()) {
+        return this.postFeel(feelData);
+      }
     } else {
       return null;
     }
@@ -306,7 +360,9 @@ class Server {
       UserFeel uf = UserFeel.fromJson(j);
       return uf;
     } else if (response.statusCode == 401) {
-      return null;
+      if(await this.regetToken()) {
+        return this.getFeel();
+      }
     } else {
       printToast("서버와 연결이 원활하지 않습니다. \n 관리자에게 문의해주세요.");
       // If the server did not return a 200 OK response, then throw an exception.
@@ -325,7 +381,9 @@ class Server {
       Museum m = Museum.fromJson(j);
       return m;
     } else {
-      return null;
+      printToast("서버와 연결이 원활하지 않습니다. \n 관리자에게 문의해주세요.");
+      // If the server did not return a 200 OK response, then throw an exception.
+      throw Exception('Failed to connection');
     }
   }
 
@@ -336,7 +394,9 @@ class Server {
     if (response.statusCode == 200) {
       return true;
     } else {
-      return false;
+      printToast("서버와 연결이 원활하지 않습니다. \n 관리자에게 문의해주세요.");
+      // If the server did not return a 200 OK response, then throw an exception.
+      throw Exception('Failed to connection');
     }
   }
 
@@ -363,8 +423,14 @@ class Server {
         list_post.add(pm);
       }
       return list_post;
+    } else if (response.statusCode == 401) {
+      if(await this.regetToken()) {
+        return this.getCoumunity(pageNum);
+      }
     } else {
-      return null;
+      printToast("서버와 연결이 원활하지 않습니다. \n 관리자에게 문의해주세요.");
+      // If the server did not return a 200 OK response, then throw an exception.
+      throw Exception('Failed to connection');
     }
   }
 
@@ -383,9 +449,14 @@ class Server {
     );
     if (response.statusCode == 201) {
       return true;
+    } else if (response.statusCode == 401) {
+      if(await this.regetToken()) {
+        return this.postCoumunity(text);
+      }
     } else {
-      print(response.statusCode);
-      return false;
+      printToast("서버와 연결이 원활하지 않습니다. \n 관리자에게 문의해주세요.");
+      // If the server did not return a 200 OK response, then throw an exception.
+      throw Exception('Failed to connection');
     }
   }
 
@@ -399,10 +470,17 @@ class Server {
     );
     if (response.statusCode == 204) {
       return true;
+    } else if (response.statusCode == 401) {
+      if(await this.regetToken()) {
+        return this.delCoumunity(pageNum);
+      }
     } else {
-      return false;
+      printToast("서버와 연결이 원활하지 않습니다. \n 관리자에게 문의해주세요.");
+      // If the server did not return a 200 OK response, then throw an exception.
+      throw Exception('Failed to connection');
     }
   }
+
 
 }
 

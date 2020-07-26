@@ -1,4 +1,3 @@
-import 'package:doublecultureapp/data/UserData.dart';
 import 'package:doublecultureapp/myHttp/AdapHttp.dart';
 import 'package:doublecultureapp/myHttp/model.dart';
 import 'package:flutter/cupertino.dart';
@@ -137,16 +136,7 @@ class SGM extends StatelessWidget {
                         } else {
                           UserMuseum testMuseum = await server.postUserMuseum(
                               museumName, textController.text);
-                          if (testMuseum == null) {
-                            Token token = await server.getToken(
-                                userData.username, userData.password);
-                            if (token == null) {
-                              Navigator.pop(context);
-                              Navigator.pop(context);
-                            }
-                            testMuseum = await server.postUserMuseum(
-                                museumName, textController.text);
-                          } else {
+                          if (testMuseum != null) {
                             if (testMuseum.stampStatus == this.stempState ||
                                 testMuseum.quiz_answer ==
                                     this.textController.text) {

@@ -1,4 +1,3 @@
-import 'package:doublecultureapp/data/UserData.dart';
 import 'package:doublecultureapp/myHttp/AdapHttp.dart';
 import 'package:doublecultureapp/myHttp/model.dart';
 import 'package:flutter/cupertino.dart';
@@ -32,24 +31,9 @@ class _CommunityState extends State<Community> {
     }else {
       if (await server.postCoumunity(text)) {
         printToast("등록");
-      } else {
-        Token to = await server.getToken(userData.username, userData.password);
-        if (to == null) {
-          Navigator.pop(context);
-          Navigator.pop(context);
-        }
-        await server.postCoumunity(text);
       }
       items = await server.getCoumunity(1);
-      if (items == null) {
-        Token token =
-        await server.getToken(userData.username, userData.password);
-        if (token == null) {
-          Navigator.pop(context);
-          Navigator.pop(context);
-        }
-        items = await server.getCoumunity(1);
-      }
+
     }
     setState(() {
         _todoController.text = '';
@@ -57,28 +41,11 @@ class _CommunityState extends State<Community> {
   }
 
   void _deleteTodo(post_model todo) async {
-    if (userData.username == todo.author) {
+    if (server.username == todo.author) {
       if (await server.delCoumunity(todo.id)) {
         printToast("삭제");
-      } else {
-        Token to = await server.getToken(userData.username, userData.password);
-        if (to == null) {
-          Navigator.pop(context);
-          Navigator.pop(context);
-        }
-        await server.delCoumunity(todo.id);
       }
-
       items = await server.getCoumunity(1);
-      if (items == null) {
-        Token token =
-            await server.getToken(userData.username, userData.password);
-        if (token == null) {
-          Navigator.pop(context);
-          Navigator.pop(context);
-        }
-        items = await server.getCoumunity(1);
-      }
       setState(() {});
     } else {
       //setState(() {
@@ -92,11 +59,6 @@ class _CommunityState extends State<Community> {
     // monitor network fetch
     await Future.delayed(Duration(milliseconds: 1000));
     items = await server.getCoumunity(1);
-    if (items == null) {
-      Token token = await server.getToken(
-          userData.username, userData.password);
-      items = await server.getCoumunity(1);
-    }
     // if failed,use refreshFailed()
     _refreshController.refreshCompleted();
   }
@@ -108,11 +70,6 @@ class _CommunityState extends State<Community> {
     await Future.delayed(Duration(milliseconds: 1000));
     items += await server.getCoumunity(currentPage+1);
     currentPage+=1;
-    if (items == null) {
-      Token token = await server.getToken(
-          userData.username, userData.password);
-      items = await server.getCoumunity(1);
-    }
     // if failed,use loadFailed(),if no data return,use LoadNodata()
     //items.add((items.length + 1).toString());
     if (mounted) setState(() {});

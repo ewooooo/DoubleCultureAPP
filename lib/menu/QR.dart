@@ -1,6 +1,4 @@
-import 'package:doublecultureapp/data/UserData.dart';
 import 'package:doublecultureapp/myHttp/AdapHttp.dart';
-import 'package:doublecultureapp/myHttp/model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
@@ -61,13 +59,6 @@ class QR_state extends State<QR> {
     Position position = await getGPS();
     if(await server.updateStemp(barcode,position.latitude,position.longitude)) {
       printToast("성공적으로 등록되었습니다.");
-    }else{
-      Token token = await server.getToken(
-          userData.username, userData.password);
-      if (token == null) {
-        Navigator.pop(context);
-      }
-      await server.updateStemp(barcode,position.latitude,position.longitude);
     }
   }
 

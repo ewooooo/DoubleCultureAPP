@@ -1,4 +1,3 @@
-import 'package:doublecultureapp/data/UserData.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import "package:doublecultureapp/museum/KSM.dart";
@@ -42,14 +41,6 @@ class Home extends StatelessWidget {
                       } else {
                         UserMuseum userMuseum =
                             await server.getUserMuseum(museumNmae);
-                        if (userMuseum == null) {
-                          Token token = await server.getToken(
-                              userData.username, userData.password);
-                          if (token == null) {
-                            Navigator.pop(context);
-                          }
-                          userMuseum = await server.getUserMuseum(museumNmae);
-                        }
                         KSM page = KSM();
 
                         page.museumName = museum.museumName;
@@ -99,15 +90,6 @@ class Home extends StatelessWidget {
                           } else {
                             UserMuseum userMuseum =
                                 await server.getUserMuseum(museumNmae);
-                            if (userMuseum == null) {
-                              Token token = await server.getToken(
-                                  userData.username, userData.password);
-                              if (token == null) {
-                                Navigator.pop(context);
-                              }
-                              userMuseum =
-                                  await server.getUserMuseum(museumNmae);
-                            }
                             SGM page = SGM();
 
                             page.museumName = museum.museumName;
@@ -153,15 +135,6 @@ class Home extends StatelessWidget {
                           } else {
                             UserMuseum userMuseum =
                                 await server.getUserMuseum(museumNmae);
-                            if (userMuseum == null) {
-                              Token token = await server.getToken(
-                                  userData.username, userData.password);
-                              if (token == null) {
-                                Navigator.pop(context);
-                              }
-                              userMuseum =
-                                  await server.getUserMuseum(museumNmae);
-                            }
                             SMH page = SMH();
 
                             page.museumName = museum.museumName;
@@ -213,15 +186,6 @@ class Home extends StatelessWidget {
                           } else {
                             UserMuseum userMuseum =
                                 await server.getUserMuseum(museumNmae);
-                            if (userMuseum == null) {
-                              Token token = await server.getToken(
-                                  userData.username, userData.password);
-                              if (token == null) {
-                                Navigator.pop(context);
-                              }
-                              userMuseum =
-                                  await server.getUserMuseum(museumNmae);
-                            }
                             SHM page = SHM();
 
                             page.museumName = museum.museumName;
@@ -267,16 +231,7 @@ class Home extends StatelessWidget {
                           } else {
                             UserMuseum userMuseum =
                                 await server.getUserMuseum(museumNmae);
-                            if (userMuseum == null) {
-                              Token token = await server.getToken(
-                                  userData.username, userData.password);
-                              if (token == null) {
-                                Navigator.pop(context);
 
-                              }
-                              userMuseum =
-                                  await server.getUserMuseum(museumNmae);
-                            }
                             SHF page = SHF();
 
                             page.museumName = museum.museumName;

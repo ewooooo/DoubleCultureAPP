@@ -8,9 +8,6 @@ import "package:doublecultureapp/plus/community.dart";
 import "package:doublecultureapp/screen/login.dart";
 import "package:doublecultureapp/plus/change_PW.dart";
 import "package:doublecultureapp/plus/check.dart";
-//import "package:doublecultureapp/plus/example.dart";
-import 'package:doublecultureapp/data/UserData.dart';
-import 'package:doublecultureapp/data/UserData.dart';
 class Plus extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
@@ -63,14 +60,6 @@ class Plus extends StatelessWidget{
           onTap:() async{
 
             items = await server.getCoumunity(1);
-            if (items == null) {
-              Token token = await server.getToken(
-                  userData.username, userData.password);
-              if (token == null) {
-                Navigator.pop(context);
-              }
-              items = await server.getCoumunity(1);
-            }
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => Community()),

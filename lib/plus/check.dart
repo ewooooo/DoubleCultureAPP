@@ -1,4 +1,3 @@
-import 'package:doublecultureapp/data/UserData.dart';
 import 'package:doublecultureapp/myHttp/AdapHttp.dart';
 import 'package:doublecultureapp/myHttp/model.dart';
 import 'package:flutter/cupertino.dart';
@@ -37,15 +36,7 @@ class Completion extends StatelessWidget {
               color: Colors.white,
               onPressed: () async {
                 User user = await server.getUser();
-                if (user == null) {
-                  Token token =
-                      await server.getToken(userData.username, userData.password);
-                  if (token == null) {
-                    Navigator.pop(context);
-                    Navigator.pop(context);
-                  }
-                  User user = await server.getUser();
-                } else {
+                if (user != null) {
                   Check_yes_or_no page = Check_yes_or_no();
                   page.name = user.firstName;
                   page.studentID = user.username;

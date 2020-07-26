@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:doublecultureapp/main.dart';
 import 'package:doublecultureapp/myHttp/AdapHttp.dart';
 import 'package:doublecultureapp/myHttp/model.dart';
-import 'package:doublecultureapp/data/UserData.dart';
 import './singUp.dart';
 
 class AuthPage extends StatefulWidget {
@@ -71,17 +70,9 @@ class _AuthPageState extends State<AuthPage> {
                     //formkey를 가져와서 currentstate를 확인하고 validate를 실행해서 이 안의 Text가 우리가 원하는 건지 확인해서 아니면 에러를 내보내고 맞으면
                     String id = _emailController.text;
                     String pw = _passwordController.text;
-                    Token token = await server.getToken(id, pw);
-                    if (token == null) {
-                      printToast("아이디 or 비밀번호를 확인하세요.");
-                    } else {
-                      userData = UserData(id, pw);
+                    if(await server.getToken(id, pw)) {
                       UserFeel userfeel = await server.getFeel();
-                      if (userfeel == null) {
-                        Token to = await server.getToken(
-                            userData.username, userData.password);
-                        userfeel = await server.getFeel();
-                      }
+
                       feelController.text = userfeel.feel;
                       _emailController.text = "";
                       _passwordController.text = "";
