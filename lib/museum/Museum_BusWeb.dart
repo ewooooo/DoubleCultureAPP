@@ -14,7 +14,7 @@ class _KSM_busState extends State<KSM_bus> {
         title: Text("지도"),
         centerTitle: true,
       ),
-      url: "https://m.place.naver.com/place/12346314/location?entry=ple&subtab=location",
+      url: "https://m.place.naver.com/place/12346314/home?entry=ple&subtab=location",
     );
   }
 }
@@ -32,7 +32,7 @@ class _SGM_busState extends State<SGM_bus> {
         title: Text("지도"),
         centerTitle: true,
       ),
-      url: "https://m.place.naver.com/place/20597182/location?entry=ple&subtab=location",
+      url: "https://m.place.naver.com/place/20597182/home?entry=ple&subtab=location",
     );
   }
 }
@@ -50,7 +50,7 @@ class _SHF_busState extends State<SHF_bus> {
         title: Text("지도"),
         centerTitle: true,
       ),
-      url: "https://m.place.naver.com/place/31169145/location?entry=ple&subtab=location",
+      url: "https://m.place.naver.com/place/31169145/home?entry=ple&subtab=location",
     );
   }
 }
@@ -68,7 +68,7 @@ class _SHM_busState extends State<SHM_bus> {
         title: Text("지도"),
         centerTitle: true,
       ),
-      url: "https://m.place.naver.com/place/13093608/location?entry=ple&subtab=location",
+      url: "https://m.place.naver.com/place/13093608/home?entry=ple&subtab=location",
     );
   }
 }
@@ -86,7 +86,7 @@ class _SMH_busState extends State<SMH_bus> {
         title: Text("지도"),
         centerTitle: true,
       ),
-      url: "https://m.place.naver.com/place/12949111/location?entry=ple&subtab=location",
+      url: "https://m.place.naver.com/place/12949111/home?entry=ple&subtab=location",
     );
   }
 }

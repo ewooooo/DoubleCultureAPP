@@ -25,6 +25,9 @@ class SingUp extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            Container(
+              height: size.height * 0.1,
+            ), // gat
             Stack(
               children: <Widget>[
                 //inputform & 버튼

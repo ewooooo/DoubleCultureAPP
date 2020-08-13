@@ -51,7 +51,7 @@ class KSM extends StatelessWidget {
           children: <Widget>[
             SingleChildScrollView(
               child: Padding(
-                padding: const EdgeInsets.all(20.0),
+                padding: const EdgeInsets.fromLTRB(20,40,20,20),
                 child: Column(
                   children: <Widget>[
                     Text('경기대학교소성박물관',
@@ -131,7 +131,7 @@ class KSM extends StatelessWidget {
             ),
             SingleChildScrollView(
               child: Padding(
-                padding: const EdgeInsets.all(36.0),
+                padding: const EdgeInsets.fromLTRB(30,40,30,30),
                 child: Column(
                   children: <Widget>[
                     Text(quiz1),

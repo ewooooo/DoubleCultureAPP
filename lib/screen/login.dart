@@ -138,7 +138,7 @@ class _AuthPageState extends State<AuthPage> {
         elevation: 6,
         child: Padding(
           padding:
-              const EdgeInsets.only(left: 12.0, right: 16, top: 15, bottom: 32),
+              const EdgeInsets.only(left: 12.0, right: 16, top: 10, bottom: 32),
           child: Form(
               key: _formKey,
               child: Column(
