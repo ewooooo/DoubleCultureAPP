@@ -109,7 +109,7 @@ class Server {
       this.password = pw;
       return true;
     } else if(response.statusCode == 400){
-      printToast("로그인 정보가 옳바르지 않습니다.");
+      printToast("로그인 정보가 올바르지 않습니다.");
       return false;
     } else {
       printToast("서버와 연결이 원활하지 않습니다. \n 관리자에게 문의해주세요.");

@@ -58,7 +58,7 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
+    return  Stack(
       children: <Widget>[
         Container(
           decoration: BoxDecoration(
@@ -68,141 +68,143 @@ class Home extends StatelessWidget {
             ),
           ),
         ),
-        Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.fromLTRB(6, 18, 6, 6),
-              child: SizedBox(
-                width: MediaQuery.of(context).size.width / 1,
-                child: RaisedButton(
-                  child: Image.asset('assets/logo_KSM_1.gif'),
-                  padding: EdgeInsets.all(0.0),
-                  color: Colors.white,
-                  onPressed: () async {
-                    if (!waitblock) {
-                      waitblock = true;
-                      if (await nextPage("소성박물관", _ksm)) {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => _ksm),
-                        );
+        SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.fromLTRB(6, 18, 6, 6),
+                child: SizedBox(
+                  width: MediaQuery.of(context).size.width / 1,
+                  child: RaisedButton(
+                    child: Image.asset('assets/logo_KSM_1.gif'),
+                    padding: EdgeInsets.all(0.0),
+                    color: Colors.white,
+                    onPressed: () async {
+                      if (!waitblock) {
+                        waitblock = true;
+                        if (await nextPage("소성박물관", _ksm)) {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => _ksm),
+                          );
+                        }
+                        waitblock = false;
                       }
-                      waitblock = false;
-                    }
-                  },
+                    },
+                  ),
                 ),
               ),
-            ),
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.all(6.0),
-                  child: SizedBox(
-                    width: MediaQuery.of(context).size.width / 2.2,
-                    height: MediaQuery.of(context).size.height / 4.2,
-                    child: RaisedButton(
-                      padding: const EdgeInsets.all(20.0),
-                      child: Image.asset('assets/logo_SGM.gif'),
-                      color: Colors.white,
-                      onPressed: () async {
-                        if (!waitblock) {
-                          waitblock = true;
-                          if (await nextPage("수원광교박물관", _sgm)) {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => _sgm),
-                            );
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.all(6.0),
+                    child: SizedBox(
+                      width: MediaQuery.of(context).size.width / 2.2,
+                      height: MediaQuery.of(context).size.height / 4.2,
+                      child: RaisedButton(
+                        padding: const EdgeInsets.all(20.0),
+                        child: Image.asset('assets/logo_SGM.gif'),
+                        color: Colors.white,
+                        onPressed: () async {
+                          if (!waitblock) {
+                            waitblock = true;
+                            if (await nextPage("수원광교박물관", _sgm)) {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => _sgm),
+                              );
+                            }
+                            waitblock = false;
                           }
-                          waitblock = false;
-                        }
-                      },
+                        },
+                      ),
                     ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(6.0),
-                  child: SizedBox(
-                    width: MediaQuery.of(context).size.width / 2.2,
-                    height: MediaQuery.of(context).size.height / 4.2,
-                    child: RaisedButton(
-                      padding: const EdgeInsets.all(20.0),
-                      child: Image.asset('assets/logo_SMH.gif'),
-                      color: Colors.white,
-                      onPressed: () async {
-                        if (!waitblock) {
-                          waitblock = true;
-                          if (await nextPage("수원박물관", _smh)) {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => _smh),
-                            );
+                  Padding(
+                    padding: const EdgeInsets.all(6.0),
+                    child: SizedBox(
+                      width: MediaQuery.of(context).size.width / 2.2,
+                      height: MediaQuery.of(context).size.height / 4.2,
+                      child: RaisedButton(
+                        padding: const EdgeInsets.all(20.0),
+                        child: Image.asset('assets/logo_SMH.gif'),
+                        color: Colors.white,
+                        onPressed: () async {
+                          if (!waitblock) {
+                            waitblock = true;
+                            if (await nextPage("수원박물관", _smh)) {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => _smh),
+                              );
+                            }
+                            waitblock = false;
                           }
-                          waitblock = false;
-                        }
-                      },
+                        },
+                      ),
                     ),
                   ),
-                ),
-              ],
-            ),
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.all(6.0),
-                  child: SizedBox(
-                    width: MediaQuery.of(context).size.width / 2.2,
-                    height: MediaQuery.of(context).size.height / 4.2,
-                    child: RaisedButton(
-                      padding: const EdgeInsets.all(20.0),
-                      child: Image.asset('assets/logo_SHM.gif'),
-                      color: Colors.white,
-                      onPressed: () async {
-                        if (!waitblock) {
-                          waitblock = true;
-                          if (await nextPage("수원화성박물관", _shm)) {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => _shm),
-                            );
+                ],
+              ),
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.all(6.0),
+                    child: SizedBox(
+                      width: MediaQuery.of(context).size.width / 2.2,
+                      height: MediaQuery.of(context).size.height / 4.2,
+                      child: RaisedButton(
+                        padding: const EdgeInsets.all(20.0),
+                        child: Image.asset('assets/logo_SHM.gif'),
+                        color: Colors.white,
+                        onPressed: () async {
+                          if (!waitblock) {
+                            waitblock = true;
+                            if (await nextPage("수원화성박물관", _shm)) {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => _shm),
+                              );
+                            }
+                            waitblock = false;
                           }
-                          waitblock = false;
-                        }
-                      },
+                        },
+                      ),
                     ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(6.0),
-                  child: SizedBox(
-                    width: MediaQuery.of(context).size.width / 2.2,
-                    height: MediaQuery.of(context).size.height / 4.2,
-                    child: RaisedButton(
-                      padding: const EdgeInsets.all(20.0),
-                      child: Image.asset('assets/logo_SHF.gif'),
-                      color: Colors.white,
-                      onPressed: () async {
-                        if (!waitblock) {
-                          waitblock = true;
-                          if (await nextPage("수원화성", _shf)) {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => _shf),
-                            );
+                  Padding(
+                    padding: const EdgeInsets.all(6.0),
+                    child: SizedBox(
+                      width: MediaQuery.of(context).size.width / 2.2,
+                      height: MediaQuery.of(context).size.height / 4.2,
+                      child: RaisedButton(
+                        padding: const EdgeInsets.all(20.0),
+                        child: Image.asset('assets/logo_SHF.gif'),
+                        color: Colors.white,
+                        onPressed: () async {
+                          if (!waitblock) {
+                            waitblock = true;
+                            if (await nextPage("수원화성", _shf)) {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => _shf),
+                              );
+                            }
+                            waitblock = false;
                           }
-                          waitblock = false;
-                        }
-                      },
+                        },
+                      ),
                     ),
                   ),
-                ),
-              ],
-            ),
-          ],
+                ],
+              ),
+            ],
+          ),
         ),
       ],
     );

@@ -1,4 +1,4 @@
-package com.example.doublecultureapp
+package com.kyonggi.doublecultureapp
 
 import androidx.annotation.NonNull;
 import io.flutter.embedding.android.FlutterActivity

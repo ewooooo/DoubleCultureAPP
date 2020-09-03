@@ -8,7 +8,12 @@ import "package:doublecultureapp/menu/review.dart";
 import "package:doublecultureapp/menu/plus.dart";
 import 'package:flutter/services.dart';
 
-void main() => runApp(MyApp());
+//void main() => runApp(MyApp());
+
+void main(){
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+  runApp(MyApp());
+}
 
 bool waitblock = false;
 class MyApp extends StatefulWidget {

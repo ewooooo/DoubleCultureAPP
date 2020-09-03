@@ -29,11 +29,11 @@ class Completion extends StatelessWidget {
                     style: TextStyle(color: Colors.red, fontSize: 20.0)),
                 //body
                 Text(
-                  '   본인의 이수여부를 \n       확인하세요!',
+                  '   본인의 이수여부를 \n        확인하세요!',
                 ),
                 new Icon(Icons.arrow_downward, color: Colors.green, size: 30.0),
                 RaisedButton(
-                  child: Text('관리자에게 요청', style: TextStyle(color: Colors.red)),
+                  child: Text('확인하기', style: TextStyle(color: Colors.blueGrey)),
                   color: Colors.white,
                   onPressed: () async {
                     if (!waitblock) {
@@ -57,7 +57,8 @@ class Completion extends StatelessWidget {
                     }
                   },
                 ),
-                Text('\n  문제발생시 연락주세요.\n\n        031-249-1483\n    (경기대 소성박물관)'),
+                Text(
+                    '\n   문제발생시 연락주세요.\n\n         031-249-8903\n         (경기대 학예팀)'),
               ]),
         ),
       ),
@@ -114,7 +115,7 @@ class Check_yes_or_no extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
 
-                            Text('    경기대 소성박물관     ', style: TextStyle(fontSize: 17),),
+                            Text('    경기대소성박물관     ', style: TextStyle(fontSize: 17),),
                             Text('\n'),
                             Text('    수원 광교박물관     ', style: TextStyle(fontSize: 17),),
                             Text('\n'),
