@@ -39,7 +39,7 @@
 
 남은우 201512285@kyonggi.ac.kr
 
-- Server : Djnago, Restful, JWT, Flutter, Admin-APP
+- Server : Django, Restful, JWT, Flutter, Admin-APP
 
 편준장 jjp2548@kyonggi.ac.kr
 
