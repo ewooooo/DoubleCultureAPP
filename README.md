@@ -28,7 +28,7 @@
 <img src="README/info.PNG" width="150px" height="300px"></img> <img src="README/community.png" width="150px" height="300px"></img> <img src="README/info2.png" width="150px" height="300px"></img>
 
 ---
-<img src="README/store.PNG"></img>
+<img src="README/store.png"></img>
 
 ---
 ## Developrer
