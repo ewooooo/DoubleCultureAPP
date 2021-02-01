@@ -23,9 +23,7 @@
 
 ---
 ## APP UI/UX
-<img src="README/login.jpg" width="150px" height="300px"></img> <img src="README/main.PNG" width="150px" height="300px"></img> <img src="README/museum.png" width="150px" height="300px"></img> 
-
-<img src="README/info.PNG" width="150px" height="300px"></img> <img src="README/community.png" width="150px" height="300px"></img> <img src="README/info2.png" width="150px" height="300px"></img>
+<img src="README/login.jpg" width="150px" height="300px"></img> <img src="README/main.PNG" width="150px" height="300px"></img> <img src="README/museum.png" width="150px" height="300px"></img> <img src="README/info.PNG" width="150px" height="300px"></img> <img src="README/community.png" width="150px" height="300px"></img>
 
 ---
 <img src="README/store.png"></img>
@@ -43,11 +41,11 @@
 
 편준장 jjp2548@kyonggi.ac.kr
 
-- APP : Flutter, Packaging
+- APP : Flutter, UX/UI, Packaging
 
 우현경 dnjsm77@kyonggi.ac.kr
 
-- APP : Flutter, UX/UI
+- APP : Flutter, UX/UI, Packaging
 
 ---
 
