@@ -23,9 +23,9 @@
 
 ---
 ## APP UI/UX
-<img src="README/login.jpg" width="150px" height="300px"></img> <img src="README/main.png" width="150px" height="300px"></img> <img src="README/museum.png" width="150px" height="300px"></img> 
+<img src="README/login.jpg" width="150px" height="300px"></img> <img src="README/main.PNG" width="150px" height="300px"></img> <img src="README/museum.png" width="150px" height="300px"></img> 
 
-<img src="README/info.png" width="150px" height="300px"></img> <img src="README/community.png" width="150px" height="300px"></img> <img src="README/info2.png" width="150px" height="300px"></img>
+<img src="README/info.PNG" width="150px" height="300px"></img> <img src="README/community.png" width="150px" height="300px"></img> <img src="README/info2.png" width="150px" height="300px"></img>
 
 
 ---
