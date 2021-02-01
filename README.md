@@ -56,7 +56,7 @@ Server(django)
 
 - https://github.com/ewooooo/DoubleCulture
 
-Admin-App(fluuter)
+Admin-App(flutter)
 
 - https://github.com/ewooooo/DoubleCulture_admin
 
